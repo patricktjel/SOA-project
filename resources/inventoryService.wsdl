@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="inventory" targetNamespace="http://www.example.org/inventory" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/inventory" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+  <wsdl:message name="getPairOfSkatesRequest">
+    <wsdl:part name="size" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="getPairOfSkatesResponse">
+    <wsdl:part name="iceSkateID" type="xsd:integer">
+    </wsdl:part>
+    <wsdl:part name="price" type="xsd:double">
+    </wsdl:part>
+    <wsdl:part name="availability" type="xsd:boolean">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="inventoryPortType">
+    <wsdl:operation name="inventory">
+      <wsdl:input message="tns:getPairOfSkatesRequest">
+    </wsdl:input>
+      <wsdl:output message="tns:getPairOfSkatesResponse">
+    </wsdl:output>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="inventoryBinding" type="tns:inventoryPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="inventory">
+      <soap:operation style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://www.example.org/inventory"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" namespace="http://www.example.org/inventory"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="inventoryService">
+    <wsdl:port name="inventoryPort" binding="tns:inventoryBinding">
+      <soap:address location="http://localhost:8080/SOA-project/services/inventoryService"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

@@ -52,7 +52,8 @@ local.properties
 .worksheet
 
 .project
-.classpath
 target
 
-WebContent/axis2-web/
+WebContent/
+build/
+.classpath

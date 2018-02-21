@@ -12,6 +12,7 @@
 	<wsdl:message name="getPairOfSkatesResponse">
 		<wsdl:part name="iceSkateID" type="xsd:integer"/>
 		<wsdl:part name="price" type="xsd:double"/>
+		<wsdl:part name="availability" type="xsd:boolean"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="inventoryPortType">
@@ -36,7 +37,7 @@
 	
 	<wsdl:service name="inventoryService">
 		<wsdl:port name="inventoryPort" binding="tns:inventoryBinding">
-			<soap:address location="http://localhost:8080/project/services/inventoryService"/>
+			<soap:address location="http://localhost:8080/SOA-project/services/inventoryService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

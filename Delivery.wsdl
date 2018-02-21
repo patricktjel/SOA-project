@@ -36,7 +36,7 @@
 	
 	<wsdl:service name="deliveryService">
 		<wsdl:port name="deliveryPort" binding="tns:deliveryBinding">
-			<soap:address location="http://localhost:8080/project/services/deliveryService"/>
+			<soap:address location="http://localhost:8080/SOA-project/services/deliveryService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>
