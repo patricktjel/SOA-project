@@ -50,3 +50,9 @@ local.properties
 .cache-main
 .scala_dependencies
 .worksheet
+
+.project
+.classpath
+target
+
+WebContent/axis2-web/
