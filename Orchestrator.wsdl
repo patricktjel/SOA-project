@@ -6,6 +6,16 @@
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
+	<wsdl:message name="rentIceSkatesRequest">
+		<wsdl:part name="size" type="xsd:string"/>
+		<wsdl:part name="bankaccount" type="xsd:string"/>
+	</wsdl:message>
+	
+	<wsdl:message name="rentIceSkatesResponse">
+		<wsdl:part name="succeeded" type="xsd:boolean"/>
+		<wsdl:part name="iceskates" type="xsd:string"/>
+	</wsdl:message>
+
 	<wsdl:message name="requestForDeliveryResponse">
 		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
 		<wsdl:part name="price" type="xsd:double"/>
@@ -17,6 +27,10 @@
 	</wsdl:message>
 	
 	<wsdl:portType name="OrchestratorPortType">
+		<wsdl:operation name="rentIceSkates">
+			<wsdl:input message="tns:rentIceSkatesRequest"/>
+			<wsdl:output message="tns:rentIceSkatesResponse"/>
+		</wsdl:operation>
 		<wsdl:operation name="DeliveryResponse">
 			<wsdl:input message="tns:requestForDeliveryResponse"/>
 		</wsdl:operation>
@@ -27,6 +41,12 @@
 	
 	<wsdl:binding name="orchestratorBinding" type="tns:OrchestratorPortType">
 		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+		<wsdl:operation name="rentIceSkates">
+			<soap:operation style="rpc"/>
+			<wsdl:input>
+				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
+			</wsdl:input>
+		</wsdl:operation>
 		<wsdl:operation name="DeliveryResponse">
 			<soap:operation style="rpc"/>
 			<wsdl:input>
