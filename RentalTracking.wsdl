@@ -8,7 +8,7 @@
 
 	<wsdl:message name="trackIceSkateRequest">
 		<wsdl:part name="iceSkateID" type="xsd:integer"/>
-		<wsdl:part name="clientCallback" type="xsd:string"/>
+		<wsdl:part name="callbackURL" type="xsd:string"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="rentalTrackingPortType">

@@ -8,16 +8,12 @@
 
 	<wsdl:message name="requestForDelivery">
 		<wsdl:part name="iceSkateID" type="xsd:integer"/>
-	</wsdl:message>
-	<wsdl:message name="requestForDeliveryResponse">
-		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
-		<wsdl:part name="price" type="xsd:double"/>
+		<wsdl:part name="callbackURL" type="xsd:string"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="deliveryPortType">
 		<wsdl:operation name="delivery">
 			<wsdl:input message="tns:requestForDelivery"/>
-			<wsdl:output message="tns:requestForDeliveryResponse"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	
@@ -28,9 +24,6 @@
 			<wsdl:input>
 				<soap:body use="literal" namespace="http://www.example.org/delivery"/>
 			</wsdl:input>
-			<wsdl:output>
-				<soap:body use="literal" namespace="http://www.example.org/delivery"/>
-			</wsdl:output>
 		</wsdl:operation>
 	</wsdl:binding>
 	
