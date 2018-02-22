@@ -6,14 +6,14 @@
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
 	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
 
-	<wsdl:message name="trackIceSkateRequest">
-		<wsdl:part name="iceSkateID" type="xsd:integer"/>
+	<wsdl:message name="trackIceSkatesRequest">
+		<wsdl:part name="iceSkatesID" type="xsd:integer"/>
 		<wsdl:part name="callbackURL" type="xsd:string"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="rentalTrackingPortType">
 		<wsdl:operation name="rentalTracking">
-			<wsdl:input message="tns:trackIceSkateRequest"/>
+			<wsdl:input message="tns:trackIceSkatesRequest"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	

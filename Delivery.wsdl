@@ -4,16 +4,27 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="http://www.example.org/delivery" 
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:customer="http://www.example.org/customer">
 
-	<wsdl:message name="requestForDelivery">
-		<wsdl:part name="iceSkateID" type="xsd:integer"/>
+	<wsdl:types>
+	    <xsd:schema>
+	      <xsd:import id="customer.xsd"
+	                  schemaLocation="./customer.xsd"
+	                  namespace="http://www.example.org/customer"/>
+	    </xsd:schema>
+  	</wsdl:types>
+  	
+	<wsdl:message name="requestDelivery">
+		<wsdl:part name="weight" type="xsd:string"/>
+		<wsdl:part name="iceSkatesID" type="xsd:integer"/>
+		<wsdl:part name="customer" type="customer:Customer"/>
 		<wsdl:part name="callbackURL" type="xsd:string"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="deliveryPortType">
 		<wsdl:operation name="delivery">
-			<wsdl:input message="tns:requestForDelivery"/>
+			<wsdl:input message="tns:requestDelivery"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	

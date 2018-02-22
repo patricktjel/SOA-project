@@ -4,28 +4,36 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="http://www.example.org/billing" 
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:customer="http://www.example.org/customer">
+	
+	<wsdl:types>
+	    <xsd:schema>
+	      <xsd:import id="customer.xsd"
+	                  schemaLocation="./customer.xsd"
+	                  namespace="http://www.example.org/customer"/>
+	    </xsd:schema>
+  	</wsdl:types>
 
-	<wsdl:message name="createBilling">
-		<wsdl:part name="rentalPrice" type="xsd:double"/>
-		<wsdl:part name="rentalDays" type="xsd:integer"/>
-		<wsdl:part name="deliveryPrice" type="xsd:double"/>
-		<wsdl:part name="bankAccount" type="xsd:string"/>
+	<wsdl:message name="paymentRequest">
+		<wsdl:part name="totalprice" type="xsd:double"/>
+		<wsdl:part name="customer" type="customer:Customer"/>
 	</wsdl:message>
-	<wsdl:message name="createBillingResponse">
+	
+	<wsdl:message name="paymentResponse">
 		<wsdl:part name="succeeded" type="xsd:boolean"/>
 	</wsdl:message>
 	
-	<wsdl:portType name="billingPortType">
-		<wsdl:operation name="billing">
-			<wsdl:input message="tns:createBilling"/>
-			<wsdl:output message="tns:createBillingResponse"/>
+	<wsdl:portType name="paymentPortType">
+		<wsdl:operation name="payment">
+			<wsdl:input message="tns:paymentRequest"/>
+			<wsdl:output message="tns:paymentResponse"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	
-	<wsdl:binding name="billingBinding" type="tns:billingPortType">
+	<wsdl:binding name="paymentBinding" type="tns:paymentPortType">
 		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
-		<wsdl:operation name="billing">
+		<wsdl:operation name="payment">
 			<soap:operation style="rpc"/>
 			<wsdl:input>
 				<soap:body use="literal" namespace="http://www.example.org/billing"/>
@@ -37,7 +45,7 @@
 	</wsdl:binding>
 	
 	<wsdl:service name="billingService">
-		<wsdl:port name="billingPort" binding="tns:billingBinding">
+		<wsdl:port name="paymentPort" binding="tns:paymentBinding">
 			<soap:address location="http://localhost:8080/SOA-project/services/billingService"/>
 		</wsdl:port>
 	</wsdl:service>

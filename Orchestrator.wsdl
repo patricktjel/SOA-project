@@ -4,26 +4,40 @@
 	xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
 	xmlns:tns="http://www.example.org/orchestrator" 
 	xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
-	xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns:customer="http://www.example.org/customer">
+	
+	<wsdl:types>
+	    <xsd:schema>
+	      <xsd:import id="customer.xsd"
+	                  schemaLocation="./customer.xsd"
+	                  namespace="http://www.example.org/customer"/>
+	    </xsd:schema>
+  	</wsdl:types>
 
 	<wsdl:message name="rentIceSkatesRequest">
+		<wsdl:part name="customer" type="customer:Customer"/>
 		<wsdl:part name="size" type="xsd:string"/>
-		<wsdl:part name="bankaccount" type="xsd:string"/>
 	</wsdl:message>
 	
 	<wsdl:message name="rentIceSkatesResponse">
 		<wsdl:part name="succeeded" type="xsd:boolean"/>
-		<wsdl:part name="iceskates" type="xsd:string"/>
+		<wsdl:part name="iceSkatesID" type="xsd:integer"/>
+		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
+		<wsdl:part name="carrier" type="xsd:string"/>
 	</wsdl:message>
 
-	<wsdl:message name="requestForDeliveryResponse">
-		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
+	<wsdl:message name="DeliveryResponse">
+		<wsdl:part name="approved" type="xsd:boolean"/>
+		<wsdl:part name="orderID" type="xsd:integer"/>
 		<wsdl:part name="price" type="xsd:double"/>
+		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
+		<wsdl:part name="carrier" type="xsd:string"/>
 	</wsdl:message>
 	
-	<wsdl:message name="trackingReminder">
+	<wsdl:message name="returnmentReminder">
 		<wsdl:part name="iceSkateID" type="xsd:integer"/>
-		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
+		<wsdl:part name="expectedReturnDate" type="xsd:dateTime"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="OrchestratorPortType">
@@ -32,10 +46,10 @@
 			<wsdl:output message="tns:rentIceSkatesResponse"/>
 		</wsdl:operation>
 		<wsdl:operation name="DeliveryResponse">
-			<wsdl:input message="tns:requestForDeliveryResponse"/>
+			<wsdl:input message="tns:DeliveryResponse"/>
 		</wsdl:operation>
-		<wsdl:operation name="TrackingReminder">
-			<wsdl:input message="tns:trackingReminder"/>
+		<wsdl:operation name="ReturnmentReminder">
+			<wsdl:input message="tns:returnmentReminder"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	
@@ -53,7 +67,7 @@
 				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
 			</wsdl:input>
 		</wsdl:operation>
-		<wsdl:operation name="TrackingReminder">
+		<wsdl:operation name="ReturnmentReminder">
 			<soap:operation style="rpc"/>
 			<wsdl:input>
 				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>

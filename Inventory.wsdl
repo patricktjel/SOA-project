@@ -9,8 +9,9 @@
 	<wsdl:message name="getPairOfSkatesRequest">
 		<wsdl:part name="size" type="xsd:string" />
 	</wsdl:message>
+	
 	<wsdl:message name="getPairOfSkatesResponse">
-		<wsdl:part name="iceSkateID" type="xsd:integer"/>
+		<wsdl:part name="iceSkatesID" type="xsd:integer"/>
 		<wsdl:part name="price" type="xsd:double"/>
 		<wsdl:part name="availability" type="xsd:boolean"/>
 	</wsdl:message>
