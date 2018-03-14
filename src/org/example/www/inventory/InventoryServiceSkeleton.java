@@ -16,11 +16,11 @@ import java.util.Stack;
 public class InventoryServiceSkeleton implements InventoryServiceSkeletonInterface {
 
 	private InventoryModel model;
-	
+
 	public InventoryServiceSkeleton() {
 		model = InventoryModel.getInstance();
 	}
-	
+
 	/**
 	 * Auto generated method signature
 	 * 
@@ -29,9 +29,9 @@ public class InventoryServiceSkeleton implements InventoryServiceSkeletonInterfa
 	 */
 	public org.example.www.inventory.InventoryResponse inventory(org.example.www.inventory.Inventory inventory0) {
 		InventoryResponse response = new InventoryResponse();
-		
+
 		Stack<Integer> skates = model.iceSkates.get(inventory0.getSize());
-		if(skates.isEmpty()){
+		if (skates.isEmpty()) {
 			response.setAvailability(false);
 		} else {
 			int id = model.iceSkates.get(inventory0.getSize()).pop();
@@ -39,7 +39,7 @@ public class InventoryServiceSkeleton implements InventoryServiceSkeletonInterfa
 			response.setPrice(5.00);
 			response.setAvailability(true);
 		}
-		
+
 		System.out.println(model.iceSkates);
 
 		return response;
