@@ -34,7 +34,6 @@ public class InventoryModel {
 		Stack<Integer> stackXL = new Stack<>();
 		stackXL.addAll(Arrays.asList(30, 31, 32));
 		iceSkates.put("XL", stackXL);
-		System.out.println("init");
 	}
 
 	public static InventoryModel getInstance() {

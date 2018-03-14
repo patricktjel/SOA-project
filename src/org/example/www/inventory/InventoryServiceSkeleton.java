@@ -30,17 +30,17 @@ public class InventoryServiceSkeleton implements InventoryServiceSkeletonInterfa
 	public org.example.www.inventory.InventoryResponse inventory(org.example.www.inventory.Inventory inventory0) {
 		InventoryResponse response = new InventoryResponse();
 
+		System.out.println("Available stock: " + model.iceSkates);
+		
 		Stack<Integer> skates = model.iceSkates.get(inventory0.getSize());
 		if (skates.isEmpty()) {
 			response.setAvailability(false);
 		} else {
 			int id = model.iceSkates.get(inventory0.getSize()).pop();
-			response.setIceSkateID(BigInteger.valueOf(id));
+			response.setIceSkatesID(BigInteger.valueOf(id));
 			response.setPrice(5.00);
 			response.setAvailability(true);
 		}
-
-		System.out.println(model.iceSkates);
 
 		return response;
 	}

@@ -5,7 +5,7 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="getPairOfSkatesResponse">
-    <wsdl:part name="iceSkateID" type="xsd:integer">
+    <wsdl:part name="iceSkatesID" type="xsd:integer">
     </wsdl:part>
     <wsdl:part name="price" type="xsd:double">
     </wsdl:part>
