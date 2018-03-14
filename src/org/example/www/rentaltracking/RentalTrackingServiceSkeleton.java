@@ -11,7 +11,13 @@ package org.example.www.rentaltracking;
  * RentalTrackingServiceSkeleton java skeleton for the axisService
  */
 public class RentalTrackingServiceSkeleton implements RentalTrackingServiceSkeletonInterface {
+	
+	private TrackingModel model;
 
+	public RentalTrackingServiceSkeleton() {
+		model = TrackingModel.getInstance();
+	}
+	
 	/**
 	 * Auto generated method signature
 	 * 
@@ -20,8 +26,15 @@ public class RentalTrackingServiceSkeleton implements RentalTrackingServiceSkele
 	 */
 
 	public void rentalTracking(org.example.www.rentaltracking.RentalTracking rentalTracking0) {
-		// TODO : fill this with the necessary business logic
-
+		model.trackIceskates(rentalTracking0.getIceSkatesID(), rentalTracking0.getCallbackURL());
+		
+		try {
+			Thread.sleep(30000);
+			System.out.println("yh");
+		} catch (InterruptedException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

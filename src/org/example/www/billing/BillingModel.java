@@ -22,7 +22,7 @@ public class BillingModel {
 		}
 		return instance;
 	}
-	
+
 	/**
 	 * Checks if the bankaccount exists and if there is enough money available.
 	 * 
