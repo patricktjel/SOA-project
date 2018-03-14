@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?><!-- This file was auto-generated from WSDL --><!-- by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:03:39 GMT) --><serviceGroup>
-    <service name="inventoryService">
+    <service name="OrchestratorService">
         <messageReceivers>
-            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.inventory.InventoryServiceMessageReceiverInOut"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-only" class="org.example.www.orchestrator.OrchestratorServiceMessageReceiverInOnly"/>
+            <messageReceiver mep="http://www.w3.org/ns/wsdl/in-out" class="org.example.www.orchestrator.OrchestratorServiceMessageReceiverInOut"/>
         </messageReceivers>
-        <parameter name="ServiceClass">org.example.www.inventory.InventoryServiceSkeleton</parameter>
+        <parameter name="ServiceClass">org.example.www.orchestrator.OrchestratorServiceSkeleton</parameter>
         <parameter name="useOriginalwsdl">true</parameter>
         <parameter name="modifyUserWSDLPortAddress">true</parameter>
-        <operation name="inventory" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/inventory">
-            <actionMapping>http://www.example.org/inventory/inventoryPortType/inventoryRequest</actionMapping>
-            <outputActionMapping>http://www.example.org/inventory/inventoryPortType/inventoryResponse</outputActionMapping>
+        <operation name="DeliveryResponse" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/orchestrator">
+            <actionMapping>http://www.example.org/orchestrator/OrchestratorPortType/DeliveryResponse</actionMapping>
+        </operation>
+        <operation name="ReturnmentReminder" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/orchestrator">
+            <actionMapping>http://www.example.org/orchestrator/OrchestratorPortType/ReturnmentReminder</actionMapping>
+        </operation>
+        <operation name="rentIceSkates" mep="http://www.w3.org/ns/wsdl/in-out" namespace="http://www.example.org/orchestrator">
+            <actionMapping>http://www.example.org/orchestrator/OrchestratorPortType/rentIceSkatesRequest</actionMapping>
+            <outputActionMapping>http://www.example.org/orchestrator/OrchestratorPortType/rentIceSkatesResponse</outputActionMapping>
         </operation>
     </service>
 </serviceGroup>

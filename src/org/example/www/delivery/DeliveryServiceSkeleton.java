@@ -7,11 +7,22 @@
  */
 package org.example.www.delivery;
 
+import java.math.BigInteger;
+import java.util.Calendar;
+
+import org.example.www.orchestrator.DeliveryResponse;
+
 /**
  * DeliveryServiceSkeleton java skeleton for the axisService
  */
 public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface {
 
+	private DeliveryModel model;
+	
+	public DeliveryServiceSkeleton() {
+		model = DeliveryModel.getInstance();
+	}
+	
 	/**
 	 * Auto generated method signature
 	 * 
@@ -20,8 +31,15 @@ public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface
 	 */
 
 	public void delivery(org.example.www.delivery.Delivery delivery0) {
-		// TODO : fill this with the necessary business logic
-
+		DeliveryResponse response = new DeliveryResponse();
+		
+		Carrier carrier = model.getCarrier();
+		
+		response.setApproved(true);
+		response.setCarrier(carrier.getCarrierName());
+		response.setPrice(carrier.getPrice());
+		response.setOrderID(BigInteger.valueOf(model.getOrderID()));
+		response.setExpectedDeliveryDate(Calendar.getInstance());
 	}
 
 }

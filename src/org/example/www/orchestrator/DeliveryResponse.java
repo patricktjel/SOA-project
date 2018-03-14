@@ -1,156 +1,155 @@
 
 /**
- * Customer.java
+ * DeliveryResponse.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
  */
 
-package org.example.www.customer;
+package org.example.www.orchestrator;
 
 /**
- * Customer bean class
+ * DeliveryResponse bean class
  */
 @SuppressWarnings({ "unchecked", "unused" })
 
-public class Customer implements org.apache.axis2.databinding.ADBBean {
-	/*
-	 * This type was generated from the piece of schema that had name = Customer
-	 * Namespace URI = http://www.example.org/customer Namespace Prefix = ns1
-	 */
+public class DeliveryResponse implements org.apache.axis2.databinding.ADBBean {
+
+	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
+			"http://www.example.org/orchestrator", "DeliveryResponse", "ns6");
 
 	/**
-	 * field for Name
+	 * field for Approved
 	 */
 
-	protected java.lang.String localName;
+	protected boolean localApproved;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.lang.String
+	 * @return boolean
 	 */
-	public java.lang.String getName() {
-		return localName;
+	public boolean getApproved() {
+		return localApproved;
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            Name
+	 *            Approved
 	 */
-	public void setName(java.lang.String param) {
+	public void setApproved(boolean param) {
 
-		this.localName = param;
+		this.localApproved = param;
 
 	}
 
 	/**
-	 * field for Bankaccount
+	 * field for OrderID
 	 */
 
-	protected java.lang.String localBankaccount;
+	protected java.math.BigInteger localOrderID;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.lang.String
+	 * @return java.math.BigInteger
 	 */
-	public java.lang.String getBankaccount() {
-		return localBankaccount;
+	public java.math.BigInteger getOrderID() {
+		return localOrderID;
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            Bankaccount
+	 *            OrderID
 	 */
-	public void setBankaccount(java.lang.String param) {
+	public void setOrderID(java.math.BigInteger param) {
 
-		this.localBankaccount = param;
+		this.localOrderID = param;
 
 	}
 
 	/**
-	 * field for City
+	 * field for Price
 	 */
 
-	protected java.lang.String localCity;
+	protected double localPrice;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.lang.String
+	 * @return double
 	 */
-	public java.lang.String getCity() {
-		return localCity;
+	public double getPrice() {
+		return localPrice;
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            City
+	 *            Price
 	 */
-	public void setCity(java.lang.String param) {
+	public void setPrice(double param) {
 
-		this.localCity = param;
+		this.localPrice = param;
 
 	}
 
 	/**
-	 * field for Street
+	 * field for ExpectedDeliveryDate
 	 */
 
-	protected java.lang.String localStreet;
+	protected java.util.Calendar localExpectedDeliveryDate;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.lang.String
+	 * @return java.util.Calendar
 	 */
-	public java.lang.String getStreet() {
-		return localStreet;
+	public java.util.Calendar getExpectedDeliveryDate() {
+		return localExpectedDeliveryDate;
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            Street
+	 *            ExpectedDeliveryDate
 	 */
-	public void setStreet(java.lang.String param) {
+	public void setExpectedDeliveryDate(java.util.Calendar param) {
 
-		this.localStreet = param;
+		this.localExpectedDeliveryDate = param;
 
 	}
 
 	/**
-	 * field for Housenumber
+	 * field for Carrier
 	 */
 
-	protected java.lang.String localHousenumber;
+	protected java.lang.String localCarrier;
 
 	/**
 	 * Auto generated getter method
 	 * 
 	 * @return java.lang.String
 	 */
-	public java.lang.String getHousenumber() {
-		return localHousenumber;
+	public java.lang.String getCarrier() {
+		return localCarrier;
 	}
 
 	/**
 	 * Auto generated setter method
 	 * 
 	 * @param param
-	 *            Housenumber
+	 *            Carrier
 	 */
-	public void setHousenumber(java.lang.String param) {
+	public void setCarrier(java.lang.String param) {
 
-		this.localHousenumber = param;
+		this.localCarrier = param;
 
 	}
 
@@ -163,8 +162,8 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 	public org.apache.axiom.om.OMElement getOMElement(final javax.xml.namespace.QName parentQName,
 			final org.apache.axiom.om.OMFactory factory) throws org.apache.axis2.databinding.ADBException {
 
-		org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this, parentQName);
-		return factory.createOMElement(dataSource, parentQName);
+		org.apache.axiom.om.OMDataSource dataSource = new org.apache.axis2.databinding.ADBDataSource(this, MY_QNAME);
+		return factory.createOMElement(dataSource, MY_QNAME);
 
 	}
 
@@ -186,91 +185,87 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 
 		if (serializeType) {
 
-			java.lang.String namespacePrefix = registerPrefix(xmlWriter, "http://www.example.org/customer");
+			java.lang.String namespacePrefix = registerPrefix(xmlWriter, "http://www.example.org/orchestrator");
 			if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)) {
 				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type",
-						namespacePrefix + ":Customer", xmlWriter);
+						namespacePrefix + ":DeliveryResponse", xmlWriter);
 			} else {
-				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type", "Customer", xmlWriter);
+				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "type", "DeliveryResponse",
+						xmlWriter);
 			}
 
 		}
 
 		namespace = "";
-		writeStartElement(null, namespace, "name", xmlWriter);
+		writeStartElement(null, namespace, "approved", xmlWriter);
 
-		if (localName == null) {
+		if (false) {
+
+			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
+
+		} else {
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localApproved));
+		}
+
+		xmlWriter.writeEndElement();
+
+		namespace = "";
+		writeStartElement(null, namespace, "orderID", xmlWriter);
+
+		if (localOrderID == null) {
 			// write the nil attribute
 
-			throw new org.apache.axis2.databinding.ADBException("name cannot be null!!");
+			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
 
 		} else {
 
-			xmlWriter.writeCharacters(localName);
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrderID));
 
 		}
 
 		xmlWriter.writeEndElement();
 
 		namespace = "";
-		writeStartElement(null, namespace, "bankaccount", xmlWriter);
+		writeStartElement(null, namespace, "price", xmlWriter);
 
-		if (localBankaccount == null) {
+		if (java.lang.Double.isNaN(localPrice)) {
+
+			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
+
+		} else {
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrice));
+		}
+
+		xmlWriter.writeEndElement();
+
+		namespace = "";
+		writeStartElement(null, namespace, "expectedDeliveryDate", xmlWriter);
+
+		if (localExpectedDeliveryDate == null) {
 			// write the nil attribute
 
-			throw new org.apache.axis2.databinding.ADBException("bankaccount cannot be null!!");
+			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
 
 		} else {
 
-			xmlWriter.writeCharacters(localBankaccount);
+			xmlWriter.writeCharacters(
+					org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExpectedDeliveryDate));
 
 		}
 
 		xmlWriter.writeEndElement();
 
 		namespace = "";
-		writeStartElement(null, namespace, "city", xmlWriter);
+		writeStartElement(null, namespace, "carrier", xmlWriter);
 
-		if (localCity == null) {
+		if (localCarrier == null) {
 			// write the nil attribute
 
-			throw new org.apache.axis2.databinding.ADBException("city cannot be null!!");
+			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
 
 		} else {
 
-			xmlWriter.writeCharacters(localCity);
-
-		}
-
-		xmlWriter.writeEndElement();
-
-		namespace = "";
-		writeStartElement(null, namespace, "street", xmlWriter);
-
-		if (localStreet == null) {
-			// write the nil attribute
-
-			throw new org.apache.axis2.databinding.ADBException("street cannot be null!!");
-
-		} else {
-
-			xmlWriter.writeCharacters(localStreet);
-
-		}
-
-		xmlWriter.writeEndElement();
-
-		namespace = "";
-		writeStartElement(null, namespace, "housenumber", xmlWriter);
-
-		if (localHousenumber == null) {
-			// write the nil attribute
-
-			throw new org.apache.axis2.databinding.ADBException("housenumber cannot be null!!");
-
-		} else {
-
-			xmlWriter.writeCharacters(localHousenumber);
+			xmlWriter.writeCharacters(localCarrier);
 
 		}
 
@@ -281,8 +276,8 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 	}
 
 	private static java.lang.String generatePrefix(java.lang.String namespace) {
-		if (namespace.equals("http://www.example.org/customer")) {
-			return "ns1";
+		if (namespace.equals("http://www.example.org/orchestrator")) {
+			return "ns6";
 		}
 		return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 	}
@@ -461,45 +456,28 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 		java.util.ArrayList elementList = new java.util.ArrayList();
 		java.util.ArrayList attribList = new java.util.ArrayList();
 
-		elementList.add(new javax.xml.namespace.QName("", "name"));
+		elementList.add(new javax.xml.namespace.QName("", "approved"));
 
-		if (localName != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localName));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("name cannot be null!!");
-		}
+		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localApproved));
 
-		elementList.add(new javax.xml.namespace.QName("", "bankaccount"));
+		elementList.add(new javax.xml.namespace.QName("", "orderID"));
 
-		if (localBankaccount != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localBankaccount));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("bankaccount cannot be null!!");
-		}
+		elementList.add(localOrderID == null ? null
+				: org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrderID));
 
-		elementList.add(new javax.xml.namespace.QName("", "city"));
+		elementList.add(new javax.xml.namespace.QName("", "price"));
 
-		if (localCity != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCity));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("city cannot be null!!");
-		}
+		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrice));
 
-		elementList.add(new javax.xml.namespace.QName("", "street"));
+		elementList.add(new javax.xml.namespace.QName("", "expectedDeliveryDate"));
 
-		if (localStreet != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localStreet));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("street cannot be null!!");
-		}
+		elementList.add(localExpectedDeliveryDate == null ? null
+				: org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExpectedDeliveryDate));
 
-		elementList.add(new javax.xml.namespace.QName("", "housenumber"));
+		elementList.add(new javax.xml.namespace.QName("", "carrier"));
 
-		if (localHousenumber != null) {
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localHousenumber));
-		} else {
-			throw new org.apache.axis2.databinding.ADBException("housenumber cannot be null!!");
-		}
+		elementList.add(localCarrier == null ? null
+				: org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCarrier));
 
 		return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(),
 				attribList.toArray());
@@ -520,8 +498,8 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 		 * at its end element If this object is a complex type, the reader is positioned
 		 * at the end element of its outer element
 		 */
-		public static Customer parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
-			Customer object = new Customer();
+		public static DeliveryResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception {
+			DeliveryResponse object = new DeliveryResponse();
 
 			int event;
 			java.lang.String nillableValue = null;
@@ -544,11 +522,11 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 
 						java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":") + 1);
 
-						if (!"Customer".equals(type)) {
+						if (!"DeliveryResponse".equals(type)) {
 							// find namespace for the prefix
 							java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-							return (Customer) org.example.www.orchestrator.ExtensionMapper.getTypeObject(nsUri, type,
-									reader);
+							return (DeliveryResponse) org.example.www.orchestrator.ExtensionMapper.getTypeObject(nsUri,
+									type, reader);
 						}
 
 					}
@@ -564,17 +542,75 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 				while (!reader.isStartElement() && !reader.isEndElement())
 					reader.next();
 
-				if (reader.isStartElement() && new javax.xml.namespace.QName("", "name").equals(reader.getName())) {
+				if (reader.isStartElement() && new javax.xml.namespace.QName("", "approved").equals(reader.getName())) {
 
 					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "name" + "  cannot be null");
+					if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
+
+						java.lang.String content = reader.getElementText();
+
+						object.setApproved(org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+
+					} else {
+
+						reader.getElementText(); // throw away text nodes if any.
 					}
 
-					java.lang.String content = reader.getElementText();
+					reader.next();
 
-					object.setName(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+				} // End of if for expected property start element
+
+				else {
+					// A start element we are not expecting indicates an invalid parameter was
+					// passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+				}
+
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				if (reader.isStartElement() && new javax.xml.namespace.QName("", "orderID").equals(reader.getName())) {
+
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
+
+						java.lang.String content = reader.getElementText();
+
+						object.setOrderID(org.apache.axis2.databinding.utils.ConverterUtil.convertToInteger(content));
+
+					} else {
+
+						reader.getElementText(); // throw away text nodes if any.
+					}
+
+					reader.next();
+
+				} // End of if for expected property start element
+
+				else {
+					// A start element we are not expecting indicates an invalid parameter was
+					// passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+				}
+
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				if (reader.isStartElement() && new javax.xml.namespace.QName("", "price").equals(reader.getName())) {
+
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
+
+						java.lang.String content = reader.getElementText();
+
+						object.setPrice(org.apache.axis2.databinding.utils.ConverterUtil.convertToDouble(content));
+
+					} else {
+
+						object.setPrice(java.lang.Double.NaN);
+
+						reader.getElementText(); // throw away text nodes if any.
+					}
 
 					reader.next();
 
@@ -590,17 +626,20 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 					reader.next();
 
 				if (reader.isStartElement()
-						&& new javax.xml.namespace.QName("", "bankaccount").equals(reader.getName())) {
+						&& new javax.xml.namespace.QName("", "expectedDeliveryDate").equals(reader.getName())) {
 
 					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "bankaccount" + "  cannot be null");
+					if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
+
+						java.lang.String content = reader.getElementText();
+
+						object.setExpectedDeliveryDate(
+								org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(content));
+
+					} else {
+
+						reader.getElementText(); // throw away text nodes if any.
 					}
-
-					java.lang.String content = reader.getElementText();
-
-					object.setBankaccount(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
 
 					reader.next();
 
@@ -615,68 +654,19 @@ public class Customer implements org.apache.axis2.databinding.ADBBean {
 				while (!reader.isStartElement() && !reader.isEndElement())
 					reader.next();
 
-				if (reader.isStartElement() && new javax.xml.namespace.QName("", "city").equals(reader.getName())) {
+				if (reader.isStartElement() && new javax.xml.namespace.QName("", "carrier").equals(reader.getName())) {
 
 					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "city" + "  cannot be null");
+					if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
+
+						java.lang.String content = reader.getElementText();
+
+						object.setCarrier(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+
+					} else {
+
+						reader.getElementText(); // throw away text nodes if any.
 					}
-
-					java.lang.String content = reader.getElementText();
-
-					object.setCity(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-
-					reader.next();
-
-				} // End of if for expected property start element
-
-				else {
-					// A start element we are not expecting indicates an invalid parameter was
-					// passed
-					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-				}
-
-				while (!reader.isStartElement() && !reader.isEndElement())
-					reader.next();
-
-				if (reader.isStartElement() && new javax.xml.namespace.QName("", "street").equals(reader.getName())) {
-
-					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "street" + "  cannot be null");
-					}
-
-					java.lang.String content = reader.getElementText();
-
-					object.setStreet(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-
-					reader.next();
-
-				} // End of if for expected property start element
-
-				else {
-					// A start element we are not expecting indicates an invalid parameter was
-					// passed
-					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-				}
-
-				while (!reader.isStartElement() && !reader.isEndElement())
-					reader.next();
-
-				if (reader.isStartElement()
-						&& new javax.xml.namespace.QName("", "housenumber").equals(reader.getName())) {
-
-					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-					if ("true".equals(nillableValue) || "1".equals(nillableValue)) {
-						throw new org.apache.axis2.databinding.ADBException(
-								"The element: " + "housenumber" + "  cannot be null");
-					}
-
-					java.lang.String content = reader.getElementText();
-
-					object.setHousenumber(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
 
 					reader.next();
 

@@ -11,6 +11,12 @@ package org.example.www.billing;
  * BillingServiceSkeleton java skeleton for the axisService
  */
 public class BillingServiceSkeleton implements BillingServiceSkeletonInterface {
+	
+	private BillingModel model;
+
+	public BillingServiceSkeleton() {
+		model = BillingModel.getInstance();
+	}
 
 	/**
 	 * Auto generated method signature
@@ -20,8 +26,10 @@ public class BillingServiceSkeleton implements BillingServiceSkeletonInterface {
 	 */
 
 	public org.example.www.billing.PaymentResponse payment(org.example.www.billing.Payment payment0) {
-		// TODO : fill this with the necessary business logic
-		throw new java.lang.UnsupportedOperationException("Please implement " + this.getClass().getName() + "#payment");
+			PaymentResponse response = new PaymentResponse();
+			
+			response.setSucceeded(model.doPayment(payment0.getCustomer().getBankaccount(), payment0.getTotalprice()));
+			return response;
 	}
 
 }
