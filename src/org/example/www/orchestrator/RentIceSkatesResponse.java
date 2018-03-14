@@ -21,7 +21,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.example.org/orchestrator",
                 "rentIceSkatesResponse",
-                "ns6");
+                "ns3");
 
             
 
@@ -278,7 +278,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/orchestrator")){
-                return "ns6";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }

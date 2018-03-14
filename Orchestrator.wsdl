@@ -28,6 +28,7 @@
 	</wsdl:message>
 
 	<wsdl:message name="DeliveryResponse">
+		<wsdl:part name="deliverID" type="xsd:int"/> 
 		<wsdl:part name="approved" type="xsd:boolean"/>
 		<wsdl:part name="orderID" type="xsd:integer"/>
 		<wsdl:part name="price" type="xsd:double"/>
@@ -80,7 +81,7 @@
 
 	<wsdl:service name="OrchestratorService">
 		<wsdl:port name="orchestratorPort" binding="tns:orchestratorBinding">
-			<soap:address location="http://localhost:8080/SOA-project/services/orchestratorService"/>
+			<soap:address location="http://localhost:8080/SOA-project/services/OrchestratorService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

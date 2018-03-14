@@ -6,6 +6,8 @@
 	    </xsd:schema>
   </wsdl:types>
   <wsdl:message name="DeliveryResponse">
+    <wsdl:part name="deliverID" type="xsd:int">
+    </wsdl:part>
     <wsdl:part name="approved" type="xsd:boolean">
     </wsdl:part>
     <wsdl:part name="orderID" type="xsd:integer">
@@ -81,7 +83,7 @@
   </wsdl:binding>
   <wsdl:service name="OrchestratorService">
     <wsdl:port name="orchestratorPort" binding="tns:orchestratorBinding">
-      <soap:address location="http://localhost:8080/SOA-project/services/orchestratorService"/>
+      <soap:address location="http://localhost:8080/SOA-project/services/OrchestratorService"/>
     </wsdl:port>
   </wsdl:service>
 </wsdl:definitions>

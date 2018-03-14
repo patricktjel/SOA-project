@@ -41,8 +41,10 @@ public class TrackingModel {
 	 * @param iceskatesID
 	 * @param customerCallback
 	 */
-	public void trackIceskates(BigInteger iceskatesID, String customerCallback) {
-		trackingSkates.add(new TrackCustomer(iceskatesID, customerCallback));
-		System.out.println(trackingSkates);
+	public Calendar trackIceskates(BigInteger iceskatesID, String customerCallback) {
+		TrackCustomer tracker = new TrackCustomer(iceskatesID, customerCallback);
+		trackingSkates.add(tracker);
+
+		return tracker.returnDate;
 	}
 }

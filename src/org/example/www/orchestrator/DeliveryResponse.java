@@ -16,7 +16,34 @@ package org.example.www.orchestrator;
 public class DeliveryResponse implements org.apache.axis2.databinding.ADBBean {
 
 	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-			"http://www.example.org/orchestrator", "DeliveryResponse", "ns6");
+			"http://www.example.org/orchestrator", "DeliveryResponse", "ns3");
+
+	/**
+	 * field for DeliverID
+	 */
+
+	protected int localDeliverID;
+
+	/**
+	 * Auto generated getter method
+	 * 
+	 * @return int
+	 */
+	public int getDeliverID() {
+		return localDeliverID;
+	}
+
+	/**
+	 * Auto generated setter method
+	 * 
+	 * @param param
+	 *            DeliverID
+	 */
+	public void setDeliverID(int param) {
+
+		this.localDeliverID = param;
+
+	}
 
 	/**
 	 * field for Approved
@@ -197,6 +224,19 @@ public class DeliveryResponse implements org.apache.axis2.databinding.ADBBean {
 		}
 
 		namespace = "";
+		writeStartElement(null, namespace, "deliverID", xmlWriter);
+
+		if (localDeliverID == java.lang.Integer.MIN_VALUE) {
+
+			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
+
+		} else {
+			xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDeliverID));
+		}
+
+		xmlWriter.writeEndElement();
+
+		namespace = "";
 		writeStartElement(null, namespace, "approved", xmlWriter);
 
 		if (false) {
@@ -277,7 +317,7 @@ public class DeliveryResponse implements org.apache.axis2.databinding.ADBBean {
 
 	private static java.lang.String generatePrefix(java.lang.String namespace) {
 		if (namespace.equals("http://www.example.org/orchestrator")) {
-			return "ns6";
+			return "ns3";
 		}
 		return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 	}
@@ -456,6 +496,10 @@ public class DeliveryResponse implements org.apache.axis2.databinding.ADBBean {
 		java.util.ArrayList elementList = new java.util.ArrayList();
 		java.util.ArrayList attribList = new java.util.ArrayList();
 
+		elementList.add(new javax.xml.namespace.QName("", "deliverID"));
+
+		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDeliverID));
+
 		elementList.add(new javax.xml.namespace.QName("", "approved"));
 
 		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localApproved));
@@ -538,6 +582,36 @@ public class DeliveryResponse implements org.apache.axis2.databinding.ADBBean {
 				java.util.Vector handledAttributes = new java.util.Vector();
 
 				reader.next();
+
+				while (!reader.isStartElement() && !reader.isEndElement())
+					reader.next();
+
+				if (reader.isStartElement()
+						&& new javax.xml.namespace.QName("", "deliverID").equals(reader.getName())) {
+
+					nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
+					if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
+
+						java.lang.String content = reader.getElementText();
+
+						object.setDeliverID(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
+
+					} else {
+
+						object.setDeliverID(java.lang.Integer.MIN_VALUE);
+
+						reader.getElementText(); // throw away text nodes if any.
+					}
+
+					reader.next();
+
+				} // End of if for expected property start element
+
+				else {
+					// A start element we are not expecting indicates an invalid parameter was
+					// passed
+					throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
+				}
 
 				while (!reader.isStartElement() && !reader.isEndElement())
 					reader.next();

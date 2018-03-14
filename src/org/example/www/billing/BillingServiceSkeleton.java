@@ -28,7 +28,9 @@ public class BillingServiceSkeleton implements BillingServiceSkeletonInterface {
 	public org.example.www.billing.PaymentResponse payment(org.example.www.billing.Payment payment0) {
 			PaymentResponse response = new PaymentResponse();
 			
-			response.setSucceeded(model.doPayment(payment0.getCustomer().getBankaccount(), payment0.getTotalprice()));
+			boolean success = model.doPayment(payment0.getCustomer().getBankaccount(), payment0.getTotalprice());
+			response.setSucceeded(success);
+			System.out.println("payment was succesfull?:" + success);
 			return response;
 	}
 

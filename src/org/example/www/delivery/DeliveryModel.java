@@ -36,7 +36,7 @@ public class DeliveryModel {
 	}
 	
 	public int getOrderID() {
-		orderID = orderID++;
+		orderID = orderID+1;
 		return orderID;
 	}
 }
