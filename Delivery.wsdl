@@ -17,7 +17,7 @@
   	
 	<wsdl:message name="requestDelivery">
 		<wsdl:part name="weight" type="xsd:string"/>
-		<wsdl:part name="iceSkatesID" type="xsd:integer"/>
+		<wsdl:part name="iceSkatesID" type="xsd:int"/>
 		<wsdl:part name="customer" type="customer:Customer"/>
 		<wsdl:part name="callbackURL" type="xsd:string"/>
 		<wsdl:part name="deliveryID" type="xsd:int"/>

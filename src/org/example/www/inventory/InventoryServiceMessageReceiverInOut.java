@@ -37,22 +37,41 @@
 
         
 
+            if("returnSkates".equals(methodName)){
+                
+                org.example.www.inventory.ReturnSkatesResponse returnSkatesResponse13 = null;
+	                        org.example.www.inventory.ReturnSkates wrappedParam =
+                                                             (org.example.www.inventory.ReturnSkates)fromOM(
+                                    msgContext.getEnvelope().getBody().getFirstElement(),
+                                    org.example.www.inventory.ReturnSkates.class,
+                                    getEnvelopeNamespaces(msgContext.getEnvelope()));
+                                                
+                                               returnSkatesResponse13 =
+                                                   
+                                                   
+                                                         skel.returnSkates(wrappedParam)
+                                                    ;
+                                            
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), returnSkatesResponse13, false, new javax.xml.namespace.QName("http://www.example.org/inventory",
+                                                    "returnSkates"));
+                                    } else 
+
             if("inventory".equals(methodName)){
                 
-                org.example.www.inventory.InventoryResponse inventoryResponse7 = null;
+                org.example.www.inventory.InventoryResponse inventoryResponse15 = null;
 	                        org.example.www.inventory.Inventory wrappedParam =
                                                              (org.example.www.inventory.Inventory)fromOM(
                                     msgContext.getEnvelope().getBody().getFirstElement(),
                                     org.example.www.inventory.Inventory.class,
                                     getEnvelopeNamespaces(msgContext.getEnvelope()));
                                                 
-                                               inventoryResponse7 =
+                                               inventoryResponse15 =
                                                    
                                                    
                                                          skel.inventory(wrappedParam)
                                                     ;
                                             
-                                        envelope = toEnvelope(getSOAPFactory(msgContext), inventoryResponse7, false, new javax.xml.namespace.QName("http://www.example.org/inventory",
+                                        envelope = toEnvelope(getSOAPFactory(msgContext), inventoryResponse15, false, new javax.xml.namespace.QName("http://www.example.org/inventory",
                                                     "inventory"));
                                     
             } else {
@@ -69,6 +88,34 @@
         }
         
         //
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.inventory.ReturnSkates param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.inventory.ReturnSkates.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
+            private  org.apache.axiom.om.OMElement  toOM(org.example.www.inventory.ReturnSkatesResponse param, boolean optimizeContent)
+            throws org.apache.axis2.AxisFault {
+
+            
+                        try{
+                             return param.getOMElement(org.example.www.inventory.ReturnSkatesResponse.MY_QNAME,
+                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
+                        } catch(org.apache.axis2.databinding.ADBException e){
+                            throw org.apache.axis2.AxisFault.makeFault(e);
+                        }
+                    
+
+            }
+        
             private  org.apache.axiom.om.OMElement  toOM(org.example.www.inventory.Inventory param, boolean optimizeContent)
             throws org.apache.axis2.AxisFault {
 
@@ -97,6 +144,25 @@
 
             }
         
+                    private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.inventory.ReturnSkatesResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
+                        throws org.apache.axis2.AxisFault{
+                      try{
+                          org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
+                           
+                                    emptyEnvelope.getBody().addChild(param.getOMElement(org.example.www.inventory.ReturnSkatesResponse.MY_QNAME,factory));
+                                
+
+                         return emptyEnvelope;
+                    } catch(org.apache.axis2.databinding.ADBException e){
+                        throw org.apache.axis2.AxisFault.makeFault(e);
+                    }
+                    }
+                    
+                         private org.example.www.inventory.ReturnSkatesResponse wrapreturnSkates(){
+                                org.example.www.inventory.ReturnSkatesResponse wrappedElement = new org.example.www.inventory.ReturnSkatesResponse();
+                                return wrappedElement;
+                         }
+                    
                     private  org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory, org.example.www.inventory.InventoryResponse param, boolean optimizeContent, javax.xml.namespace.QName methodQName)
                         throws org.apache.axis2.AxisFault{
                       try{
@@ -143,6 +209,20 @@
                 if (org.example.www.inventory.InventoryResponse.class.equals(type)){
                 
                         return org.example.www.inventory.InventoryResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.inventory.ReturnSkates.class.equals(type)){
+                
+                        return org.example.www.inventory.ReturnSkates.Factory.parse(param.getXMLStreamReaderWithoutCaching());
+                    
+
+                }
+            
+                if (org.example.www.inventory.ReturnSkatesResponse.class.equals(type)){
+                
+                        return org.example.www.inventory.ReturnSkatesResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }

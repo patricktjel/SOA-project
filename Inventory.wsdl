@@ -11,9 +11,18 @@
 	</wsdl:message>
 	
 	<wsdl:message name="getPairOfSkatesResponse">
-		<wsdl:part name="iceSkatesID" type="xsd:integer"/>
+		<wsdl:part name="iceSkatesID" type="xsd:int"/>
 		<wsdl:part name="price" type="xsd:double"/>
 		<wsdl:part name="availability" type="xsd:boolean"/>
+	</wsdl:message>
+	
+	<wsdl:message name="returnPairOfSkates">
+		<wsdl:part name="size" type="xsd:string" />
+		<wsdl:part name="iceSkatesID" type="xsd:int" />
+	</wsdl:message>
+	
+	<wsdl:message name="returnPairOfSkatesResponse">
+		<wsdl:part name="succeeded" type="xsd:boolean"/>
 	</wsdl:message>
 	
 	<wsdl:portType name="inventoryPortType">
@@ -21,11 +30,24 @@
 			<wsdl:input message="tns:getPairOfSkatesRequest"/>
 			<wsdl:output message="tns:getPairOfSkatesResponse"/>
 		</wsdl:operation>
+		<wsdl:operation name="returnSkates">
+			<wsdl:input message="tns:returnPairOfSkates"/>
+			<wsdl:output message="tns:returnPairOfSkatesResponse"/>
+		</wsdl:operation>
 	</wsdl:portType>
 	
 	<wsdl:binding name="inventoryBinding" type="tns:inventoryPortType">
 		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<wsdl:operation name="inventory">
+			<soap:operation style="rpc"/>
+			<wsdl:input>
+				<soap:body use="literal" namespace="http://www.example.org/inventory"/>
+			</wsdl:input>
+			<wsdl:output>
+				<soap:body use="literal" namespace="http://www.example.org/inventory"/>
+			</wsdl:output>
+		</wsdl:operation>
+		<wsdl:operation name="returnSkates">
 			<soap:operation style="rpc"/>
 			<wsdl:input>
 				<soap:body use="literal" namespace="http://www.example.org/inventory"/>

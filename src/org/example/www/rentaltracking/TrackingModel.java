@@ -1,6 +1,5 @@
 package org.example.www.rentaltracking;
 
-import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -8,11 +7,11 @@ public class TrackingModel {
 	private static TrackingModel instance = null;
 
 	private class TrackCustomer {
-		BigInteger iceskatesID;
+		int iceskatesID;
 		String customerCallback;
 		Calendar returnDate;
 		
-		public TrackCustomer(BigInteger iceskatesID, String customerCallback) {
+		public TrackCustomer(int iceskatesID, String customerCallback) {
 			this.iceskatesID = iceskatesID;
 			this.customerCallback = customerCallback;
 			
@@ -41,7 +40,7 @@ public class TrackingModel {
 	 * @param iceskatesID
 	 * @param customerCallback
 	 */
-	public Calendar trackIceskates(BigInteger iceskatesID, String customerCallback) {
+	public Calendar trackIceskates(int iceskatesID, String customerCallback) {
 		TrackCustomer tracker = new TrackCustomer(iceskatesID, customerCallback);
 		trackingSkates.add(tracker);
 

@@ -10,7 +10,7 @@
     </wsdl:part>
     <wsdl:part name="approved" type="xsd:boolean">
     </wsdl:part>
-    <wsdl:part name="orderID" type="xsd:integer">
+    <wsdl:part name="orderID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="price" type="xsd:double">
     </wsdl:part>
@@ -28,7 +28,7 @@
   <wsdl:message name="rentIceSkatesResponse">
     <wsdl:part name="succeeded" type="xsd:boolean">
     </wsdl:part>
-    <wsdl:part name="iceSkatesID" type="xsd:integer">
+    <wsdl:part name="iceSkatesID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="expectedDeliveryDate" type="xsd:dateTime">
     </wsdl:part>
@@ -36,7 +36,7 @@
     </wsdl:part>
   </wsdl:message>
   <wsdl:message name="returnmentReminder">
-    <wsdl:part name="iceSkateID" type="xsd:integer">
+    <wsdl:part name="iceSkateID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="expectedReturnDate" type="xsd:dateTime">
     </wsdl:part>

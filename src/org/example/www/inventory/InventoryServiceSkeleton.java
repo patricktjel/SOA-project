@@ -7,9 +7,6 @@
  */
 package org.example.www.inventory;
 
-import java.math.BigInteger;
-import java.util.Stack;
-
 /**
  * InventoryServiceSkeleton java skeleton for the axisService
  */
@@ -30,9 +27,9 @@ public class InventoryServiceSkeleton implements InventoryServiceSkeletonInterfa
 	public org.example.www.inventory.InventoryResponse inventory(org.example.www.inventory.Inventory inventory0) {
 		InventoryResponse response = new InventoryResponse();
 
-		BigInteger id = model.getIceskates(inventory0.getSize());
+		int id = model.getIceskates(inventory0.getSize());
 		
-		if (null == id) {
+		if (-1 == id) {
 			response.setAvailability(false);
 		} else {
 			response.setIceSkatesID(id);
@@ -40,6 +37,15 @@ public class InventoryServiceSkeleton implements InventoryServiceSkeletonInterfa
 			response.setAvailability(true);
 		}
 
+		return response;
+	}
+	
+	public org.example.www.inventory.ReturnSkatesResponse returnSkates(org.example.www.inventory.ReturnSkates returnSkates0) {
+		int id = returnSkates0.getIceSkatesID();
+		String size = returnSkates0.getSize();
+		
+		ReturnSkatesResponse response = new ReturnSkatesResponse();
+		response.setSucceeded(model.returnSkates(size, id));
 		return response;
 	}
 

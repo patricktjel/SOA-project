@@ -21,7 +21,7 @@
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
                 "http://www.example.org/delivery",
                 "delivery",
-                "ns2");
+                "ns3");
 
             
 
@@ -60,14 +60,14 @@
                         */
 
                         
-                                    protected java.math.BigInteger localIceSkatesID ;
+                                    protected int localIceSkatesID ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.math.BigInteger
+                           * @return int
                            */
-                           public  java.math.BigInteger getIceSkatesID(){
+                           public  int getIceSkatesID(){
                                return localIceSkatesID;
                            }
 
@@ -77,7 +77,7 @@
                                * Auto generated setter method
                                * @param param IceSkatesID
                                */
-                               public void setIceSkatesID(java.math.BigInteger param){
+                               public void setIceSkatesID(int param){
                             
                                             this.localIceSkatesID=param;
                                        
@@ -255,18 +255,13 @@
                                     namespace = "";
                                     writeStartElement(null, namespace, "iceSkatesID", xmlWriter);
                              
-
-                                          if (localIceSkatesID==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
-                                            
-                                          }
+                                               if (localIceSkatesID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -320,7 +315,7 @@
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
             if(namespace.equals("http://www.example.org/delivery")){
-                return "ns2";
+                return "ns3";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -507,9 +502,9 @@
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "iceSkatesID"));
                                  
-                                         elementList.add(localIceSkatesID==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
+                            
                             elementList.add(new javax.xml.namespace.QName("",
                                                                       "customer"));
                             
@@ -645,11 +640,13 @@
                                     java.lang.String content = reader.getElementText();
                                     
                                               object.setIceSkatesID(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInteger(content));
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                             
                                        } else {
                                            
                                            
+                                                   object.setIceSkatesID(java.lang.Integer.MIN_VALUE);
+                                               
                                            reader.getElementText(); // throw away text nodes if any.
                                        }
                                       

@@ -8,7 +8,7 @@
   <wsdl:message name="requestDelivery">
     <wsdl:part name="weight" type="xsd:string">
     </wsdl:part>
-    <wsdl:part name="iceSkatesID" type="xsd:integer">
+    <wsdl:part name="iceSkatesID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="customer" type="customer:Customer">
     </wsdl:part>

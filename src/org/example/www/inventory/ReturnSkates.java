@@ -1,55 +1,55 @@
 
 /**
- * RentIceSkatesResponse.java
+ * ReturnSkates.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:04:10 GMT)
  */
 
             
-                package org.example.www.orchestrator;
+                package org.example.www.inventory;
             
 
             /**
-            *  RentIceSkatesResponse bean class
+            *  ReturnSkates bean class
             */
             @SuppressWarnings({"unchecked","unused"})
         
-        public  class RentIceSkatesResponse
+        public  class ReturnSkates
         implements org.apache.axis2.databinding.ADBBean{
         
                 public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-                "http://www.example.org/orchestrator",
-                "rentIceSkatesResponse",
-                "ns4");
+                "http://www.example.org/inventory",
+                "returnSkates",
+                "ns1");
 
             
 
                         /**
-                        * field for Succeeded
+                        * field for Size
                         */
 
                         
-                                    protected boolean localSucceeded ;
+                                    protected java.lang.String localSize ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return boolean
+                           * @return java.lang.String
                            */
-                           public  boolean getSucceeded(){
-                               return localSucceeded;
+                           public  java.lang.String getSize(){
+                               return localSize;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param Succeeded
+                               * @param param Size
                                */
-                               public void setSucceeded(boolean param){
+                               public void setSize(java.lang.String param){
                             
-                                            this.localSucceeded=param;
+                                            this.localSize=param;
                                        
 
                                }
@@ -80,66 +80,6 @@
                                public void setIceSkatesID(int param){
                             
                                             this.localIceSkatesID=param;
-                                       
-
-                               }
-                            
-
-                        /**
-                        * field for ExpectedDeliveryDate
-                        */
-
-                        
-                                    protected java.util.Calendar localExpectedDeliveryDate ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.util.Calendar
-                           */
-                           public  java.util.Calendar getExpectedDeliveryDate(){
-                               return localExpectedDeliveryDate;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param ExpectedDeliveryDate
-                               */
-                               public void setExpectedDeliveryDate(java.util.Calendar param){
-                            
-                                            this.localExpectedDeliveryDate=param;
-                                       
-
-                               }
-                            
-
-                        /**
-                        * field for Carrier
-                        */
-
-                        
-                                    protected java.lang.String localCarrier ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getCarrier(){
-                               return localCarrier;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param Carrier
-                               */
-                               public void setCarrier(java.lang.String param){
-                            
-                                            this.localCarrier=param;
                                        
 
                                }
@@ -190,14 +130,14 @@
                   if (serializeType){
                
 
-                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/orchestrator");
+                   java.lang.String namespacePrefix = registerPrefix(xmlWriter,"http://www.example.org/inventory");
                    if ((namespacePrefix != null) && (namespacePrefix.trim().length() > 0)){
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           namespacePrefix+":rentIceSkatesResponse",
+                           namespacePrefix+":returnSkates",
                            xmlWriter);
                    } else {
                        writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","type",
-                           "rentIceSkatesResponse",
+                           "returnSkates",
                            xmlWriter);
                    }
 
@@ -205,15 +145,20 @@
                    }
                
                                     namespace = "";
-                                    writeStartElement(null, namespace, "succeeded", xmlWriter);
+                                    writeStartElement(null, namespace, "size", xmlWriter);
                              
-                                               if (false) {
-                                           
-                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                      
-                                               } else {
-                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSucceeded));
-                                               }
+
+                                          if (localSize==null){
+                                              // write the nil attribute
+                                              
+                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                  
+                                          }else{
+
+                                        
+                                                   xmlWriter.writeCharacters(localSize);
+                                            
+                                          }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -230,50 +175,14 @@
                                     
                                    xmlWriter.writeEndElement();
                              
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "expectedDeliveryDate", xmlWriter);
-                             
-
-                                          if (localExpectedDeliveryDate==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExpectedDeliveryDate));
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "carrier", xmlWriter);
-                             
-
-                                          if (localCarrier==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localCarrier);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
                     xmlWriter.writeEndElement();
                
 
         }
 
         private static java.lang.String generatePrefix(java.lang.String namespace) {
-            if(namespace.equals("http://www.example.org/orchestrator")){
-                return "ns4";
+            if(namespace.equals("http://www.example.org/inventory")){
+                return "ns1";
             }
             return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
         }
@@ -452,29 +361,17 @@
 
                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "succeeded"));
+                                                                      "size"));
                                  
-                                elementList.add(
-                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSucceeded));
-                            
+                                         elementList.add(localSize==null?null:
+                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localSize));
+                                    
                                       elementList.add(new javax.xml.namespace.QName("",
                                                                       "iceSkatesID"));
                                  
                                 elementList.add(
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
                             
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "expectedDeliveryDate"));
-                                 
-                                         elementList.add(localExpectedDeliveryDate==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localExpectedDeliveryDate));
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
-                                                                      "carrier"));
-                                 
-                                         elementList.add(localCarrier==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCarrier));
-                                    
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -499,9 +396,9 @@
         * Postcondition: If this object is an element, the reader is positioned at its end element
         *                If this object is a complex type, the reader is positioned at the end element of its outer element
         */
-        public static RentIceSkatesResponse parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
-            RentIceSkatesResponse object =
-                new RentIceSkatesResponse();
+        public static ReturnSkates parse(javax.xml.stream.XMLStreamReader reader) throws java.lang.Exception{
+            ReturnSkates object =
+                new ReturnSkates();
 
             int event;
             java.lang.String nillableValue = null;
@@ -525,10 +422,10 @@
 
                     java.lang.String type = fullTypeName.substring(fullTypeName.indexOf(":")+1);
                     
-                            if (!"rentIceSkatesResponse".equals(type)){
+                            if (!"returnSkates".equals(type)){
                                 //find namespace for the prefix
                                 java.lang.String nsUri = reader.getNamespaceContext().getNamespaceURI(nsPrefix);
-                                return (RentIceSkatesResponse)org.example.www.orchestrator.ExtensionMapper.getTypeObject(
+                                return (ReturnSkates)org.example.www.inventory.ExtensionMapper.getTypeObject(
                                      nsUri,type,reader);
                               }
                         
@@ -553,7 +450,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","succeeded").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","size").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -561,8 +458,8 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setSucceeded(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToBoolean(content));
+                                              object.setSize(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
                                             
                                        } else {
                                            
@@ -598,64 +495,6 @@
                                            
                                                    object.setIceSkatesID(java.lang.Integer.MIN_VALUE);
                                                
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","expectedDeliveryDate").equals(reader.getName())){
-                                
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setExpectedDeliveryDate(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToDateTime(content));
-                                            
-                                       } else {
-                                           
-                                           
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
-                                        reader.next();
-                                    
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","carrier").equals(reader.getName())){
-                                
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setCarrier(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                                       } else {
-                                           
-                                           
                                            reader.getElementText(); // throw away text nodes if any.
                                        }
                                       

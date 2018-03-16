@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <wsdl:definitions name="rentalTracking" targetNamespace="http://www.example.org/rentalTracking" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/rentalTracking" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:message name="trackIceSkatesRequest">
-    <wsdl:part name="iceSkatesID" type="xsd:integer">
+    <wsdl:part name="iceSkatesID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="callbackURL" type="xsd:string">
     </wsdl:part>

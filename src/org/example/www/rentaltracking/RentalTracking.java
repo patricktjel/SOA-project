@@ -16,20 +16,20 @@ package org.example.www.rentaltracking;
 public class RentalTracking implements org.apache.axis2.databinding.ADBBean {
 
 	public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
-			"http://www.example.org/rentalTracking", "rentalTracking", "ns4");
+			"http://www.example.org/rentalTracking", "rentalTracking", "ns5");
 
 	/**
 	 * field for IceSkatesID
 	 */
 
-	protected java.math.BigInteger localIceSkatesID;
+	protected int localIceSkatesID;
 
 	/**
 	 * Auto generated getter method
 	 * 
-	 * @return java.math.BigInteger
+	 * @return int
 	 */
-	public java.math.BigInteger getIceSkatesID() {
+	public int getIceSkatesID() {
 		return localIceSkatesID;
 	}
 
@@ -39,7 +39,7 @@ public class RentalTracking implements org.apache.axis2.databinding.ADBBean {
 	 * @param param
 	 *            IceSkatesID
 	 */
-	public void setIceSkatesID(java.math.BigInteger param) {
+	public void setIceSkatesID(int param) {
 
 		this.localIceSkatesID = param;
 
@@ -117,16 +117,13 @@ public class RentalTracking implements org.apache.axis2.databinding.ADBBean {
 		namespace = "";
 		writeStartElement(null, namespace, "iceSkatesID", xmlWriter);
 
-		if (localIceSkatesID == null) {
-			// write the nil attribute
+		if (localIceSkatesID == java.lang.Integer.MIN_VALUE) {
 
 			writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
 
 		} else {
-
 			xmlWriter.writeCharacters(
 					org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
-
 		}
 
 		xmlWriter.writeEndElement();
@@ -153,7 +150,7 @@ public class RentalTracking implements org.apache.axis2.databinding.ADBBean {
 
 	private static java.lang.String generatePrefix(java.lang.String namespace) {
 		if (namespace.equals("http://www.example.org/rentalTracking")) {
-			return "ns4";
+			return "ns5";
 		}
 		return org.apache.axis2.databinding.utils.BeanUtil.getUniquePrefix();
 	}
@@ -334,8 +331,7 @@ public class RentalTracking implements org.apache.axis2.databinding.ADBBean {
 
 		elementList.add(new javax.xml.namespace.QName("", "iceSkatesID"));
 
-		elementList.add(localIceSkatesID == null ? null
-				: org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
+		elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
 
 		elementList.add(new javax.xml.namespace.QName("", "callbackURL"));
 
@@ -413,10 +409,11 @@ public class RentalTracking implements org.apache.axis2.databinding.ADBBean {
 
 						java.lang.String content = reader.getElementText();
 
-						object.setIceSkatesID(
-								org.apache.axis2.databinding.utils.ConverterUtil.convertToInteger(content));
+						object.setIceSkatesID(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
 
 					} else {
+
+						object.setIceSkatesID(java.lang.Integer.MIN_VALUE);
 
 						reader.getElementText(); // throw away text nodes if any.
 					}

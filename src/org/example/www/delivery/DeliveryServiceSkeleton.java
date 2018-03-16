@@ -39,7 +39,7 @@ public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface
 		response.setApproved(true);
 		response.setCarrier(carrier.getCarrierName());
 		response.setPrice(carrier.getPrice());
-		response.setOrderID(BigInteger.valueOf(model.getOrderID()));
+		response.setOrderID(model.getOrderID());
 		response.setExpectedDeliveryDate(Calendar.getInstance());
 		response.setDeliverID(delivery0.getDeliveryID());
 		

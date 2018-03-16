@@ -1,6 +1,5 @@
 package org.example.www.inventory;
 
-import java.math.BigInteger;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
@@ -44,14 +43,17 @@ public class InventoryModel {
 		return instance;
 	}
 	
-	public BigInteger getIceskates(String size) {
-		System.out.println("Available stock: " + iceSkates);
-		
+	public int getIceskates(String size) {		
 		Stack<Integer> skates = iceSkates.get(size);
-		if (skates.isEmpty()) {
-			return null;
-		} else {
-			return BigInteger.valueOf(iceSkates.get(size).pop());
+		int iceSkatesID = -1;
+		if (!skates.isEmpty()) {
+			iceSkatesID = iceSkates.get(size).pop();
 		}
+		System.out.println("Available stock after this purchase: " + iceSkates);
+		return iceSkatesID;
+	}
+
+	public boolean returnSkates(String size, int id) {
+		return iceSkates.get(size).add(id);
 	}
 }

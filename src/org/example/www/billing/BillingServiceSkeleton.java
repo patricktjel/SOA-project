@@ -30,7 +30,7 @@ public class BillingServiceSkeleton implements BillingServiceSkeletonInterface {
 			
 			boolean success = model.doPayment(payment0.getCustomer().getBankaccount(), payment0.getTotalprice());
 			response.setSucceeded(success);
-			System.out.println("payment was succesfull?:" + success);
+			System.out.println("payment was succesfull? " + success);
 			return response;
 	}
 
