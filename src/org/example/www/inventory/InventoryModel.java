@@ -10,7 +10,7 @@ public class InventoryModel {
 	private static InventoryModel instance = null;
 
 //	A map with the size and the amount of ice skates
-	public Map<String, Stack<Integer>> iceSkates;
+	private Map<String, Stack<Integer>> iceSkates;
 
 	private InventoryModel() {
 		initIceSkates();
@@ -32,7 +32,7 @@ public class InventoryModel {
 		iceSkates.put("L", stackL);
 		
 		Stack<Integer> stackXL = new Stack<>();
-		stackXL.addAll(Arrays.asList(30, 31, 32));
+		stackXL.addAll(Arrays.asList(30));
 		iceSkates.put("XL", stackXL);
 	}
 
@@ -46,7 +46,7 @@ public class InventoryModel {
 	public int getIceskates(String size) {		
 		Stack<Integer> skates = iceSkates.get(size);
 		int iceSkatesID = -1;
-		if (!skates.isEmpty()) {
+		if (skates != null && !skates.isEmpty()) {
 			iceSkatesID = iceSkates.get(size).pop();
 		}
 		System.out.println("Available stock after this purchase: " + iceSkates);
@@ -54,6 +54,11 @@ public class InventoryModel {
 	}
 
 	public boolean returnSkates(String size, int id) {
-		return iceSkates.get(size).add(id);
+		Stack<Integer> list = iceSkates.get(size);
+		if (null == list) {
+			return false;
+		} else {
+			return list.add(id);	
+		}
 	}
 }

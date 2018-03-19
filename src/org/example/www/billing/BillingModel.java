@@ -32,7 +32,7 @@ public class BillingModel {
 	 * @return
 	 */
 	public boolean doPayment(String bankaccount, double price) {
-		if(!balances.containsKey(bankaccount)) {
+		if (price < 0.0 || !balances.containsKey(bankaccount)) {
 			return false;
 		}
 		double balance = balances.get(bankaccount);
@@ -43,5 +43,15 @@ public class BillingModel {
 			balances.put(bankaccount, balance - price);
 			return true;
 		}
+	}
+	
+	public double getBalance(String bankaccount) {
+		Double balance = balances.get(bankaccount);
+		
+		if (balance == null) {
+			return -1;
+		} else {
+			return balance.doubleValue();
+		} 
 	}
 }
