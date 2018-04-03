@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<bpel:process exitOnStandardFault="yes" name="orchestrator.bpel"
+	suppressJoinFailure="yes" targetNamespace="http://www.example.org/orchestrator"
+	xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+	xmlns:orc="http://www.example.org/orchestrator" 
+	xmlns:inv="http://www.example.org/inventory">
+	
+	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+		location="orchestrator.wsdl" namespace="http://www.example.org/orchestrator" />
+	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+		location="Inventory.wsdl" namespace="http://www.example.org/inventory" />
+
+	<bpel:partnerLinks>
+		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService" />
+        <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"></bpel:partnerLink>
+    </bpel:partnerLinks>
+
+	<bpel:variables>
+		<bpel:variable name="rentIceSkatesRequest" messageType="orc:rentIceSkatesRequest" />
+		<bpel:variable name="getPairOfSkatesRequest" messageType="inv:getPairOfSkatesRequest" />
+		<bpel:variable name="getPairOfSkatesResponse" messageType="inv:getPairOfSkatesResponse" />
+		<bpel:variable name="returnPairOfSkates" messageType="inv:returnPairOfSkates" />
+	</bpel:variables>
+    
+    <bpel:flow name="main"><bpel:links>
+            <bpel:link name="link1"></bpel:link>
+        </bpel:links>
+    
+    	<bpel:receive name="Receive" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" createInstance="yes" variable="rentIceSkatesRequest">
+            <bpel:sources>
+                <bpel:source linkName="link1"></bpel:source>
+            </bpel:sources>
+        </bpel:receive>
+    
+        <bpel:sequence name="Sequence">
+        	<bpel:targets>
+                <bpel:target linkName="link1"></bpel:target>
+            </bpel:targets>
+            
+            <bpel:assign validate="no" name="Assign">
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$rentIceSkatesRequest.size]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$getPairOfSkatesRequest.size]]>
+                    </bpel:to>
+                </bpel:copy>
+            </bpel:assign>
+  <!--          <bpel:invoke name="Invoke" partnerLink="inventory" portType="inv:inventoryPortType" 
+				operation="getItem" inputVariable="getPairOfSkatesRequest" outputVariable="getPairOfSkatesResponse"/>
+				-->
+            <bpel:invoke name="Invoke" partnerLink="inventory" operation="inventory" portType="inv:inventoryPortType" inputVariable="getPairOfSkatesRequest" outputVariable="getPairOfSkatesResponse"></bpel:invoke>
+        </bpel:sequence>
+    
+    
+    </bpel:flow>
+</bpel:process>
