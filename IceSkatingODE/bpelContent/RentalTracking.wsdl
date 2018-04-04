@@ -12,17 +12,17 @@
 		<wsdl:part name="callbackURL" type="xsd:string"/>
 	</wsdl:message>
 	
-	<wsdl:portType name="rentalTrackingPortType">
+	<wsdl:portType name="trackingPortType">
 		<wsdl:operation name="rentalTracking">
 			<wsdl:input message="tns:trackIceSkatesRequest"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	
 	<plnk:partnerLinkType name="TrackingPLT">
-		<plnk:role name="TrackingService" portType="rentalTrackingPortType" />
+		<plnk:role name="TrackingService" portType="trackingPortType" />
 	</plnk:partnerLinkType>
 	
-	<wsdl:binding name="rentalTrackingBinding" type="tns:rentalTrackingPortType">
+	<wsdl:binding name="trackingBinding" type="tns:trackingPortType">
 		<soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
 		<wsdl:operation name="rentalTracking">
 			<soap:operation style="rpc"/>
@@ -33,7 +33,7 @@
 	</wsdl:binding>
 	
 	<wsdl:service name="rentalTrackingService">
-		<wsdl:port name="rentalTrackingPort" binding="tns:rentalTrackingBinding">
+		<wsdl:port name="trackingPort" binding="tns:trackingBinding">
 			<soap:address location="http://localhost:9080/tracking_service/services/rentalTrackingService"/>
 		</wsdl:port>
 	</wsdl:service>

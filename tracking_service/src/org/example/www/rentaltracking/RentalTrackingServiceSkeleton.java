@@ -9,9 +9,6 @@ package org.example.www.rentaltracking;
 
 import java.util.Calendar;
 
-import org.example.www.orchestrator.OrchestratorServiceSkeleton;
-import org.example.www.orchestrator.ReturnmentReminder;
-
 /**
  * RentalTrackingServiceSkeleton java skeleton for the axisService
  */
@@ -33,18 +30,20 @@ public class RentalTrackingServiceSkeleton implements RentalTrackingServiceSkele
 	public void rentalTracking(org.example.www.rentaltracking.RentalTracking rentalTracking0) {
 		Calendar returndate = model.trackIceskates(rentalTracking0.getIceSkatesID(), rentalTracking0.getCallbackURL());
 		
-		ReturnmentReminder response = new ReturnmentReminder();
-		response.setExpectedReturnDate(returndate);
-		response.setIceSkateID(rentalTracking0.getIceSkatesID());
+		System.out.println("started tracking");
 		
-		try {
-			Thread.sleep(10000);
-			//temporary callback
-			new OrchestratorServiceSkeleton().returnmentReminder(response);			
-		} catch (InterruptedException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+//		ReturnmentReminder response = new ReturnmentReminder();
+//		response.setExpectedReturnDate(returndate);
+//		response.setIceSkateID(rentalTracking0.getIceSkatesID());
+//		
+//		try {
+//			Thread.sleep(10000);
+//			//temporary callback
+//			new OrchestratorServiceSkeleton().returnmentReminder(response);			
+//		} catch (InterruptedException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 
 }
