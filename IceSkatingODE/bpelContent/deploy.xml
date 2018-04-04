@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:inventory="http://www.example.org/inventory" xmlns:orchestrator="http://www.example.org/orchestrator">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:delivery="http://www.example.org/delivery" xmlns:inventory="http://www.example.org/inventory" xmlns:orchestrator="http://www.example.org/orchestrator">
   <process name="orchestrator:orchestrator.bpel">
     <active>true</active>
     <retired>false</retired>
@@ -9,6 +9,9 @@
     </provide>
     <invoke partnerLink="inventory">
       <service name="inventory:inventoryService" port="inventoryPort"/>
+    </invoke>
+    <invoke partnerLink="delivery">
+      <service name="delivery:deliveryService" port="deliveryPort"/>
     </invoke>
   </process>
 </deploy>

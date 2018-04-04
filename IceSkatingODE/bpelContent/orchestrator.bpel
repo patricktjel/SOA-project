@@ -3,16 +3,20 @@
 	suppressJoinFailure="yes" targetNamespace="http://www.example.org/orchestrator"
 	xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
 	xmlns:orc="http://www.example.org/orchestrator" 
-	xmlns:inv="http://www.example.org/inventory">
+	xmlns:inv="http://www.example.org/inventory"
+	xmlns:del="http://www.example.org/delivery">
 	
 	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
 		location="orchestrator.wsdl" namespace="http://www.example.org/orchestrator" />
 	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
 		location="Inventory.wsdl" namespace="http://www.example.org/inventory" />
+	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+		location="Delivery.wsdl" namespace="http://www.example.org/delivery" />
 
 	<bpel:partnerLinks>
-		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService" />
+		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService"/>
         <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"/>
+        <bpel:partnerLink name="delivery" partnerLinkType="del:DeliveryPLT" partnerRole="DeliveryService"/>
     </bpel:partnerLinks>
 
 	<bpel:variables>
@@ -21,15 +25,17 @@
 		<bpel:variable name="getPairOfSkatesRequest" messageType="inv:getPairOfSkatesRequest" />
 		<bpel:variable name="getPairOfSkatesResponse" messageType="inv:getPairOfSkatesResponse" />
 		<bpel:variable name="returnPairOfSkates" messageType="inv:returnPairOfSkates" />
+		<bpel:variable name="requestDelivery" messageType="del:requestDelivery" />
 	</bpel:variables>
     
-    <bpel:flow name="main">
-    	<bpel:links>
+    <bpel:flow name="main"><bpel:links>
         	<bpel:link name="link1"></bpel:link>
             <bpel:link name="link2"></bpel:link>
             <bpel:link name="link3"></bpel:link>
-            <bpel:link name="link4"></bpel:link>
+            
             <bpel:link name="link5"></bpel:link>
+            <bpel:link name="link4"></bpel:link>
+            <bpel:link name="link6"></bpel:link>
         </bpel:links>
         
         <bpel:receive name="Receive" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" createInstance="yes" variable="rentIceSkatesRequest">
@@ -108,9 +114,6 @@
                 </bpel:to>
             </bpel:copy>
         </bpel:assign>    <bpel:assign validate="no" name="Assign2">
-            <bpel:targets>
-                <bpel:target linkName="link4"></bpel:target>
-            </bpel:targets>
             <bpel:sources>
                 <bpel:source linkName="link5"></bpel:source>
             </bpel:sources>
@@ -123,6 +126,62 @@
                     <![CDATA[$rentIceSkatesResponse.succeeded]]>
                 </bpel:to>
             </bpel:copy>
+            <bpel:targets>
+                <bpel:target linkName="link6"></bpel:target>
+            </bpel:targets>
         </bpel:assign>
-    </bpel:flow>
+    
+    <bpel:sequence name="DeliverySequence">
+            <bpel:targets>
+                <bpel:target linkName="link4"></bpel:target>
+            </bpel:targets>
+            <bpel:assign validate="yes" name="Assign3">
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$getPairOfSkatesResponse.iceSkatesID]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$requestDelivery.iceSkatesID]]>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$rentIceSkatesRequest.customer]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$requestDelivery.customer]]>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$getPairOfSkatesResponse.iceSkatesID]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        
+                        <![CDATA[$requestDelivery.deliveryID]]>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from part="size" variable="getPairOfSkatesRequest"></bpel:from>
+                    <bpel:to part="callbackURL" variable="requestDelivery"></bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from part="size" variable="getPairOfSkatesRequest"></bpel:from>
+                    <bpel:to part="weight" variable="requestDelivery"></bpel:to>
+                </bpel:copy>
+            </bpel:assign>
+            
+            <bpel:sources>
+                <bpel:source linkName="link6"></bpel:source>
+            </bpel:sources>
+            <bpel:invoke name="Invoke1" partnerLink="delivery" operation="delivery" portType="del:deliveryPortType" inputVariable="requestDelivery"></bpel:invoke>
+        </bpel:sequence></bpel:flow>
 </bpel:process>

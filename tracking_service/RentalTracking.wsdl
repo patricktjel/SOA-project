@@ -29,7 +29,7 @@
 	
 	<wsdl:service name="rentalTrackingService">
 		<wsdl:port name="rentalTrackingPort" binding="tns:rentalTrackingBinding">
-			<soap:address location="http://localhost:9080/SOA-project/services/rentalTrackingService"/>
+			<soap:address location="http://localhost:9080/tracking_service/services/rentalTrackingService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

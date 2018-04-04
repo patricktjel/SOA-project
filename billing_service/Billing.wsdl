@@ -46,7 +46,7 @@
 	
 	<wsdl:service name="billingService">
 		<wsdl:port name="paymentPort" binding="tns:paymentBinding">
-			<soap:address location="http://localhost:9080/SOA-project/services/billingService"/>
+			<soap:address location="http://localhost:9080/billing_service/services/billingService"/>
 		</wsdl:port>
 	</wsdl:service>
 </wsdl:definitions>

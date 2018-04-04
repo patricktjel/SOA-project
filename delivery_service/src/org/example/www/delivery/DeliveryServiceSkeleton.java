@@ -10,7 +10,6 @@ package org.example.www.delivery;
 import java.util.Calendar;
 
 import org.example.www.orchestrator.DeliveryResponse;
-import org.example.www.orchestrator.OrchestratorServiceSkeleton;
 
 /**
  * DeliveryServiceSkeleton java skeleton for the axisService
@@ -31,19 +30,25 @@ public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface
 	 */
 
 	public void delivery(org.example.www.delivery.Delivery delivery0) {
-		DeliveryResponse response = new DeliveryResponse();
+//		DeliveryResponse response = new DeliveryResponse();
 		
 		Carrier carrier = model.getCarrier();
-		
-		response.setApproved(true);
-		response.setCarrier(carrier.getCarrierName());
-		response.setPrice(carrier.getPrice());
-		response.setOrderID(model.getOrderID());
-		response.setExpectedDeliveryDate(Calendar.getInstance());
-		response.setDeliverID(delivery0.getDeliveryID());
+		System.out.println(carrier);
+//		response.setApproved(true);
+//		response.setCarrier(carrier.getCarrierName());
+//		response.setPrice(carrier.getPrice());
+//		response.setOrderID(model.getOrderID());
+//		response.setExpectedDeliveryDate(Calendar.getInstance());
+//		response.setDeliverID(delivery0.getDeliveryID());
 		
 //		temporal callback
-		new OrchestratorServiceSkeleton().deliveryResponse(response);
+//		new OrchestratorServiceSkeleton().deliveryResponse(response);
+	}
+
+	@Override
+	public void deliveryResponse(DeliveryResponse deliveryResponse) {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

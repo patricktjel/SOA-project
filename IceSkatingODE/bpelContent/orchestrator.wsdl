@@ -27,15 +27,6 @@
 		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
 		<wsdl:part name="carrier" type="xsd:string"/>
 	</wsdl:message>
-
-	<wsdl:message name="DeliveryResponse">
-		<wsdl:part name="deliverID" type="xsd:int"/> 
-		<wsdl:part name="approved" type="xsd:boolean"/>
-		<wsdl:part name="orderID" type="xsd:int"/>
-		<wsdl:part name="price" type="xsd:double"/>
-		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
-		<wsdl:part name="carrier" type="xsd:string"/>
-	</wsdl:message>
 	
 	<wsdl:message name="returnmentReminder">
 		<wsdl:part name="iceSkateID" type="xsd:int"/>
@@ -46,9 +37,6 @@
 		<wsdl:operation name="rentIceSkates">
 			<wsdl:input message="tns:rentIceSkatesRequest"/>
 			<wsdl:output message="tns:rentIceSkatesResponse"/>
-		</wsdl:operation>
-		<wsdl:operation name="DeliveryResponse">
-			<wsdl:input message="tns:DeliveryResponse"/>
 		</wsdl:operation>
 		<wsdl:operation name="ReturnmentReminder">
 			<wsdl:input message="tns:returnmentReminder"/>
@@ -69,12 +57,6 @@
 			<wsdl:output>
 				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
 			</wsdl:output>
-		</wsdl:operation>
-		<wsdl:operation name="DeliveryResponse">
-			<soap:operation style="rpc"/>
-			<wsdl:input>
-				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
-			</wsdl:input>
 		</wsdl:operation>
 		<wsdl:operation name="ReturnmentReminder">
 			<soap:operation style="rpc"/>

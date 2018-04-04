@@ -1,10 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="delivery" targetNamespace="http://www.example.org/delivery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/delivery" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:customer="http://www.example.org/customer">
+<wsdl:definitions name="delivery" targetNamespace="http://www.example.org/delivery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/delivery" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:customer="http://www.example.org/customer">
   <wsdl:types>
     <xsd:schema>
 	      <xsd:import id="customer.xsd" namespace="http://www.example.org/customer" schemaLocation="customer.xsd"/>
 	    </xsd:schema>
   </wsdl:types>
+  <wsdl:message name="deliveryResponse">
+    <wsdl:part name="deliverID" type="xsd:int">
+    </wsdl:part>
+    <wsdl:part name="approved" type="xsd:boolean">
+    </wsdl:part>
+    <wsdl:part name="orderID" type="xsd:int">
+    </wsdl:part>
+    <wsdl:part name="price" type="xsd:double">
+    </wsdl:part>
+    <wsdl:part name="expectedDeliveryDate" type="xsd:dateTime">
+    </wsdl:part>
+    <wsdl:part name="carrier" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
   <wsdl:message name="requestDelivery">
     <wsdl:part name="weight" type="xsd:string">
     </wsdl:part>
@@ -22,6 +36,10 @@
       <wsdl:input message="tns:requestDelivery">
     </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="deliveryResponse">
+      <wsdl:input message="tns:deliveryResponse">
+    </wsdl:input>
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="deliveryBinding" type="tns:deliveryPortType">
     <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
@@ -31,10 +49,19 @@
         <soap:body use="literal" namespace="http://www.example.org/delivery"/>
       </wsdl:input>
     </wsdl:operation>
+    <wsdl:operation name="deliveryResponse">
+      <soap:operation style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
+      </wsdl:input>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="deliveryService">
     <wsdl:port name="deliveryPort" binding="tns:deliveryBinding">
-      <soap:address location="http://localhost:8080/SOA-project/services/deliveryService"/>
+      <soap:address location="http://localhost:9080/delivery_service/services/deliveryService"/>
     </wsdl:port>
   </wsdl:service>
+    <plnk:partnerLinkType name="DeliveryPLT">
+		<plnk:role name="DeliveryService" portType="tns:deliveryPortType"/>
+	</plnk:partnerLinkType>
 </wsdl:definitions>
