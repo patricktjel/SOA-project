@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:inventory="http://www.example.org/inventory" xmlns:orchestrator="http://www.example.org/orchestrator">
+  <process name="orchestrator:orchestrator.bpel">
+    <active>true</active>
+    <retired>false</retired>
+    <process-events generate="all"/>
+    <provide partnerLink="customer">
+      <service name="orchestrator:orchestratorService" port="orchestratorPort"/>
+    </provide>
+    <invoke partnerLink="inventory">
+      <service name="inventory:inventoryService" port="inventoryPort"/>
+    </invoke>
+  </process>
+</deploy>

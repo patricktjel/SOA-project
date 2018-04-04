@@ -12,47 +12,117 @@
 
 	<bpel:partnerLinks>
 		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService" />
-        <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"></bpel:partnerLink>
+        <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"/>
     </bpel:partnerLinks>
 
 	<bpel:variables>
 		<bpel:variable name="rentIceSkatesRequest" messageType="orc:rentIceSkatesRequest" />
+		<bpel:variable name="rentIceSkatesResponse" messageType="orc:rentIceSkatesResponse" />
 		<bpel:variable name="getPairOfSkatesRequest" messageType="inv:getPairOfSkatesRequest" />
 		<bpel:variable name="getPairOfSkatesResponse" messageType="inv:getPairOfSkatesResponse" />
 		<bpel:variable name="returnPairOfSkates" messageType="inv:returnPairOfSkates" />
 	</bpel:variables>
     
-    <bpel:flow name="main"><bpel:links>
-            <bpel:link name="link1"></bpel:link>
+    <bpel:flow name="main">
+    	<bpel:links>
+        	<bpel:link name="link1"></bpel:link>
+            <bpel:link name="link2"></bpel:link>
+            <bpel:link name="link3"></bpel:link>
+            <bpel:link name="link4"></bpel:link>
+            <bpel:link name="link5"></bpel:link>
         </bpel:links>
-    
-    	<bpel:receive name="Receive" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" createInstance="yes" variable="rentIceSkatesRequest">
+        
+        <bpel:receive name="Receive" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" createInstance="yes" variable="rentIceSkatesRequest">
             <bpel:sources>
                 <bpel:source linkName="link1"></bpel:source>
             </bpel:sources>
         </bpel:receive>
     
-        <bpel:sequence name="Sequence">
+        <bpel:sequence name="InventorySequence">
         	<bpel:targets>
                 <bpel:target linkName="link1"></bpel:target>
             </bpel:targets>
+            <bpel:sources>
+                <bpel:source linkName="link2">
+                	<bpel:transitionCondition>
+						$getPairOfSkatesResponse.availability != "true"
+					</bpel:transitionCondition>
+                </bpel:source>
+                <bpel:source linkName="link4">
+                    <bpel:transitionCondition>
+						$getPairOfSkatesResponse.availability = "true"
+					</bpel:transitionCondition>
+                </bpel:source>
+            </bpel:sources>
+
             
-            <bpel:assign validate="no" name="Assign">
-                <bpel:copy>
-                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+            
+            
+            
+            <bpel:assign validate="no" name="Assign"><bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[$rentIceSkatesRequest.size]]>
                     </bpel:from>
                     <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[$getPairOfSkatesRequest.size]]>
                     </bpel:to>
+                
                 </bpel:copy>
+            
             </bpel:assign>
-  <!--          <bpel:invoke name="Invoke" partnerLink="inventory" portType="inv:inventoryPortType" 
-				operation="getItem" inputVariable="getPairOfSkatesRequest" outputVariable="getPairOfSkatesResponse"/>
-				-->
             <bpel:invoke name="Invoke" partnerLink="inventory" operation="inventory" portType="inv:inventoryPortType" inputVariable="getPairOfSkatesRequest" outputVariable="getPairOfSkatesResponse"></bpel:invoke>
         </bpel:sequence>
     
     
+    <bpel:reply name="Reply" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" variable="rentIceSkatesResponse">
+            <bpel:targets>
+                <bpel:target linkName="link3"></bpel:target>
+                
+                <bpel:target linkName="link5"></bpel:target>
+            </bpel:targets>
+        </bpel:reply><bpel:assign validate="no" name="Assign1">
+            <bpel:targets>
+                <bpel:target linkName="link2"></bpel:target>
+            </bpel:targets>
+            <bpel:sources>
+                <bpel:source linkName="link3"></bpel:source>
+            </bpel:sources>
+            <bpel:copy>
+                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                    <![CDATA[$getPairOfSkatesResponse.availability]]>
+                </bpel:from>
+                <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    
+                    <![CDATA[$rentIceSkatesResponse.succeeded]]>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>    <bpel:assign validate="no" name="Assign2">
+            <bpel:targets>
+                <bpel:target linkName="link4"></bpel:target>
+            </bpel:targets>
+            <bpel:sources>
+                <bpel:source linkName="link5"></bpel:source>
+            </bpel:sources>
+            <bpel:copy>
+                <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                    
+                    <![CDATA[$getPairOfSkatesResponse.availability]]>
+                </bpel:from>
+                <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                    <![CDATA[$rentIceSkatesResponse.succeeded]]>
+                </bpel:to>
+            </bpel:copy>
+        </bpel:assign>
     </bpel:flow>
 </bpel:process>
