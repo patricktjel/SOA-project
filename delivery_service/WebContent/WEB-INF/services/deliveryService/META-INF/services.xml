@@ -9,8 +9,5 @@
         <operation name="delivery" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/delivery">
             <actionMapping>http://www.example.org/delivery/deliveryPortType/delivery</actionMapping>
         </operation>
-        <operation name="deliveryResponse" mep="http://www.w3.org/ns/wsdl/in-only" namespace="http://www.example.org/delivery">
-            <actionMapping>http://www.example.org/delivery/deliveryPortType/deliveryResponse</actionMapping>
-        </operation>
     </service>
 </serviceGroup>

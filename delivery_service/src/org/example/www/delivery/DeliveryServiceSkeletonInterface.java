@@ -25,19 +25,5 @@
                  )
             ;
         
-         
-        /**
-         * Auto generated method signature
-         * 
-                                    * @param deliveryResponse
-         */
-
-        
-                public void deliveryResponse
-                (
-                  org.example.www.orchestrator.DeliveryResponse deliveryResponse
-                 )
-            ;
-        
          }
     

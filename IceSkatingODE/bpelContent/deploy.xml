@@ -7,6 +7,9 @@
     <provide partnerLink="customer">
       <service name="orchestrator:orchestratorService" port="orchestratorPort"/>
     </provide>
+    <provide partnerLink="delivery">
+      <service name="delivery:deliveryCallBackService" port="deliveryCallBackPort"/>
+    </provide>
     <invoke partnerLink="inventory">
       <service name="inventory:inventoryService" port="inventoryPort"/>
     </invoke>

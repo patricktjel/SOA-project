@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <bpel:process exitOnStandardFault="yes" name="orchestrator.bpel"
 	suppressJoinFailure="yes" targetNamespace="http://www.example.org/orchestrator"
+	xmlns:tns="http://www.example.org/orchestrator"
 	xmlns:bpel="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
 	xmlns:orc="http://www.example.org/orchestrator" 
 	xmlns:inv="http://www.example.org/inventory"
 	xmlns:del="http://www.example.org/delivery"
-	xmlns:tra="http://www.example.org/rentalTracking"
 	xmlns:bil="http://www.example.org/billing">
 	
 	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
@@ -16,15 +16,15 @@
 		location="Delivery.wsdl" namespace="http://www.example.org/delivery" />
 	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
 		location="Billing.wsdl" namespace="http://www.example.org/billing" />
-	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
-		location="RentalTracking.wsdl" namespace="http://www.example.org/rentalTracking" />
+<!-- <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+		location="RentalTracking.wsdl" namespace="http://www.example.org/rentalTracking" /> -->
 
 	<bpel:partnerLinks>
 		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService"/>
         <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"/>
         <bpel:partnerLink name="delivery" partnerLinkType="del:DeliveryPLT" myRole="DeliveryServiceCallBack" partnerRole="DeliveryService"/>
         <bpel:partnerLink name="billing" partnerLinkType="bil:BillingPLT" partnerRole="BillingService"/>
-        <bpel:partnerLink name="tracking" partnerLinkType="tra:TrackingPLT" myRole="TrackingServiceCallBack" partnerRole="TrackingService"/>       
+<!-- 	<bpel:partnerLink name="tracking" partnerLinkType="tra:TrackingPLT" myRole="TrackingServiceCallBack" partnerRole="TrackingService"/>        -->
     </bpel:partnerLinks>
 
 	<bpel:variables>
@@ -41,9 +41,13 @@
 		<bpel:variable name="paymentRequest" messageType="bil:paymentRequest" />
 		<bpel:variable name="paymentResponse" messageType="bil:paymentResponse" />
 		
-		<bpel:variable name="trackIceSkatesRequest" messageType="tra:trackIceSkatesRequest" />
-		<bpel:variable name="returnmentReminder" messageType="tra:returnmentReminder" />
+<!-- 	<bpel:variable name="trackIceSkatesRequest" messageType="tra:trackIceSkatesRequest" />
+		<bpel:variable name="returnmentReminder" messageType="tra:returnmentReminder" /> -->
 	</bpel:variables>
+
+	<bpel:correlationSets>
+		<bpel:correlationSet name="correlationSet" properties="del:deliveryprop" />
+	</bpel:correlationSets>
     
     <bpel:flow name="main"><bpel:links>
         	<bpel:link name="link1"></bpel:link>
@@ -52,13 +56,6 @@
             <bpel:link name="link5"></bpel:link>
             
             <bpel:link name="link7"></bpel:link>
-            
-            
-            
-            
-            
-            
-            
             <bpel:link name="link4"></bpel:link>
             <bpel:link name="link6"></bpel:link>
         </bpel:links>
@@ -85,7 +82,7 @@
 					</bpel:transitionCondition>
                 </bpel:source>
             </bpel:sources>
-            <bpel:assign validate="no" name="Assign"><bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+            <bpel:assign validate="yes" name="Assign"><bpel:copy><bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[$rentIceSkatesRequest.size]]>
                     </bpel:from>
                     <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
@@ -105,7 +102,7 @@
                 
                 <bpel:target linkName="link5"></bpel:target>
             </bpel:targets>
-        </bpel:reply><bpel:assign validate="no" name="Assign1">
+        </bpel:reply><bpel:assign validate="yes" name="Assign1">
             <bpel:targets>
                 <bpel:target linkName="link2"></bpel:target>
             </bpel:targets>
@@ -120,7 +117,7 @@
                     <![CDATA[$rentIceSkatesResponse.succeeded]]>
                 </bpel:to>
             </bpel:copy>
-        </bpel:assign>    <bpel:assign validate="no" name="Assign2">
+        </bpel:assign>    <bpel:assign validate="yes" name="Assign2">
             <bpel:sources>
                 <bpel:source linkName="link5"></bpel:source>
             </bpel:sources>
@@ -172,8 +169,12 @@
                 </bpel:copy>
             </bpel:assign>
             
-            <bpel:invoke name="Invoke1" partnerLink="delivery" operation="delivery" portType="del:deliveryPortType" inputVariable="requestDelivery"></bpel:invoke>
-            <bpel:receive partnerLink="delivery" operation="DeliveryCallBack" portType="del:deliveryPortType" variable="DeliveryResponse"></bpel:receive>
+            <bpel:invoke name="Invoke1" partnerLink="delivery" operation="delivery" portType="del:deliveryPortType" inputVariable="requestDelivery">
+                <bpel:correlations>
+                    <bpel:correlation set="correlationSet" initiate="yes"></bpel:correlation>
+                </bpel:correlations>
+            </bpel:invoke>
+            
             
             <bpel:targets>
                 <bpel:target linkName="link4"></bpel:target>
@@ -181,11 +182,16 @@
             <bpel:sources>
                 <bpel:source linkName="link6"></bpel:source>
             </bpel:sources>
+            <bpel:receive partnerLink="delivery" operation="DeliveryCallBack" portType="del:deliveryCallBackPortType" variable="DeliveryResponse" createInstance="no">
+            	<bpel:correlations>
+                    <bpel:correlation initiate="no" set="correlationSet"></bpel:correlation>
+                </bpel:correlations>
+            </bpel:receive>
         </bpel:sequence>
         <bpel:sequence name="billing_service">
             
             
-            <bpel:assign validate="no" name="Assign4"><bpel:copy>
+            <bpel:assign validate="yes" name="Assign4"><bpel:copy>
                     <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                         <![CDATA[$rentIceSkatesRequest.customer]]>
                     </bpel:from>

@@ -7,9 +7,11 @@
  */
 package org.example.www.delivery;
 
+import java.rmi.RemoteException;
 import java.util.Calendar;
 
-import org.example.www.orchestrator.DeliveryResponse;
+import org.apache.axis2.AxisFault;
+import org.example.www.delivery.client.DeliveryServiceStub;
 
 /**
  * DeliveryServiceSkeleton java skeleton for the axisService
@@ -17,11 +19,11 @@ import org.example.www.orchestrator.DeliveryResponse;
 public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface {
 
 	private DeliveryModel model;
-	
+
 	public DeliveryServiceSkeleton() {
 		model = DeliveryModel.getInstance();
 	}
-	
+
 	/**
 	 * Auto generated method signature
 	 * 
@@ -30,25 +32,28 @@ public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface
 	 */
 
 	public void delivery(org.example.www.delivery.Delivery delivery0) {
-//		DeliveryResponse response = new DeliveryResponse();
-		
 		Carrier carrier = model.getCarrier();
 		System.out.println(carrier);
-//		response.setApproved(true);
-//		response.setCarrier(carrier.getCarrierName());
-//		response.setPrice(carrier.getPrice());
-//		response.setOrderID(model.getOrderID());
-//		response.setExpectedDeliveryDate(Calendar.getInstance());
-//		response.setDeliverID(delivery0.getDeliveryID());
-		
-//		temporal callback
-//		new OrchestratorServiceSkeleton().deliveryResponse(response);
-	}
 
-	@Override
-	public void deliveryResponse(DeliveryResponse deliveryResponse) {
-		// TODO Auto-generated method stub
-		
-	}
+		try {
+			DeliveryServiceStub stub = new DeliveryServiceStub();
+			DeliveryServiceStub.DeliveryCallBack response = new DeliveryServiceStub.DeliveryCallBack();
+			response.setCarrier(carrier.getCarrierName());
+			response.setApproved(true);
+			response.setDeliveryID(delivery0.getDeliveryID());
+			response.setExpectedDeliveryDate(Calendar.getInstance());
+			response.setOrderID(delivery0.getDeliveryID());
+			response.setPrice(carrier.getPrice());
+			
+			stub.deliveryCallBack(response);
+			System.out.println("sended");
+		} catch (AxisFault e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
+	}
 }

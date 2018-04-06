@@ -42,15 +42,6 @@
                                                         getEnvelopeNamespaces(inMessage.getEnvelope()));
                                             
                                                      skel.delivery(wrappedParam);
-                                                } else 
-            if("deliveryResponse".equals(methodName)){
-            
-            org.example.www.orchestrator.DeliveryResponse wrappedParam = (org.example.www.orchestrator.DeliveryResponse)fromOM(
-                                                        inMessage.getEnvelope().getBody().getFirstElement(),
-                                                        org.example.www.orchestrator.DeliveryResponse.class,
-                                                        getEnvelopeNamespaces(inMessage.getEnvelope()));
-                                            
-                                                     skel.deliveryResponse(wrappedParam);
                                                 
                 } else {
                   throw new java.lang.RuntimeException("method not found");
@@ -80,20 +71,6 @@
 
             }
         
-            private  org.apache.axiom.om.OMElement  toOM(org.example.www.orchestrator.DeliveryResponse param, boolean optimizeContent)
-            throws org.apache.axis2.AxisFault {
-
-            
-                        try{
-                             return param.getOMElement(org.example.www.orchestrator.DeliveryResponse.MY_QNAME,
-                                          org.apache.axiom.om.OMAbstractFactory.getOMFactory());
-                        } catch(org.apache.axis2.databinding.ADBException e){
-                            throw org.apache.axis2.AxisFault.makeFault(e);
-                        }
-                    
-
-            }
-        
 
 
         /**
@@ -114,13 +91,6 @@
                 if (org.example.www.delivery.Delivery.class.equals(type)){
                 
                         return org.example.www.delivery.Delivery.Factory.parse(param.getXMLStreamReaderWithoutCaching());
-                    
-
-                }
-            
-                if (org.example.www.orchestrator.DeliveryResponse.class.equals(type)){
-                
-                        return org.example.www.orchestrator.DeliveryResponse.Factory.parse(param.getXMLStreamReaderWithoutCaching());
                     
 
                 }
