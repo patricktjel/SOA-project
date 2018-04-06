@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions name="delivery" targetNamespace="http://www.example.org/delivery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/delivery" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:customer="http://www.example.org/customer">
+  <wsdl:types>
+    <xsd:schema>
+	      <xsd:import id="customer.xsd" namespace="http://www.example.org/customer" schemaLocation="customer.xsd"/>
+	    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="DeliveryResponse">
+    <wsdl:part name="deliveryID" type="xsd:int">
+    </wsdl:part>
+    <wsdl:part name="approved" type="xsd:boolean">
+    </wsdl:part>
+    <wsdl:part name="orderID" type="xsd:int">
+    </wsdl:part>
+    <wsdl:part name="price" type="xsd:double">
+    </wsdl:part>
+    <wsdl:part name="expectedDeliveryDate" type="xsd:dateTime">
+    </wsdl:part>
+    <wsdl:part name="carrier" type="xsd:string">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="requestDelivery">
+    <wsdl:part name="weight" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="iceSkatesID" type="xsd:int">
+    </wsdl:part>
+    <wsdl:part name="customer" type="customer:Customer">
+    </wsdl:part>
+    <wsdl:part name="callbackURL" type="xsd:string">
+    </wsdl:part>
+    <wsdl:part name="deliveryID" type="xsd:int">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:portType name="deliveryCallBackPortType">
+    <wsdl:operation name="DeliveryCallBack">
+      <wsdl:input message="tns:DeliveryResponse">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="deliveryPortType">
+    <wsdl:operation name="delivery">
+      <wsdl:input message="tns:requestDelivery">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="deliveryBinding" type="tns:deliveryPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="delivery">
+      <soap:operation style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://www.example.org/delivery"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="deliveryCallBackBinding" type="tns:deliveryCallBackPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="DeliveryCallBack">
+      <soap:operation style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://www.example.org/delivery_callbackservice"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="deliveryService">
+    <wsdl:port name="deliveryPort" binding="tns:deliveryBinding">
+      <soap:address location="http://localhost:9080/delivery_service/services/deliveryService"/>
+    </wsdl:port>
+    <wsdl:port name="deliveryCallBackPort" binding="tns:deliveryCallBackBinding">
+      <soap:address location="http://localhost:8080/ode/processes/deliveryService"/>
+    </wsdl:port>
+  </wsdl:service>
+    <plnk:partnerLinkType name="DeliveryPLT">
+		<plnk:role name="DeliveryService" portType="tns:deliveryPortType"/>
+		<plnk:role name="DeliveryServiceCallBack" portType="tns:deliveryCallBackPortType"/>
+	</plnk:partnerLinkType>
+</wsdl:definitions>

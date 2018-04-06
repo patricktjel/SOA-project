@@ -7,19 +7,16 @@
  */
 package org.example.www.rentaltracking;
 
+import java.rmi.RemoteException;
 import java.util.Calendar;
+
+import org.example.www.rentaltracking.client.RentalTrackingCallBackServiceStub;
 
 /**
  * RentalTrackingServiceSkeleton java skeleton for the axisService
  */
 public class RentalTrackingServiceSkeleton implements RentalTrackingServiceSkeletonInterface {
-	
-	private TrackingModel model;
 
-	public RentalTrackingServiceSkeleton() {
-		model = TrackingModel.getInstance();
-	}
-	
 	/**
 	 * Auto generated method signature
 	 * 
@@ -28,22 +25,26 @@ public class RentalTrackingServiceSkeleton implements RentalTrackingServiceSkele
 	 */
 
 	public void rentalTracking(org.example.www.rentaltracking.RentalTracking rentalTracking0) {
-		Calendar returndate = model.trackIceskates(rentalTracking0.getIceSkatesID(), rentalTracking0.getCallbackURL());
 		
-		System.out.println("started tracking");
+		Calendar calendar = Calendar.getInstance();
+//		return in 1 minute for testing purposes.
+		calendar.setTimeInMillis(System.currentTimeMillis() + 1000);
 		
-//		ReturnmentReminder response = new ReturnmentReminder();
-//		response.setExpectedReturnDate(returndate);
-//		response.setIceSkateID(rentalTracking0.getIceSkatesID());
-//		
-//		try {
-//			Thread.sleep(10000);
-//			//temporary callback
-//			new OrchestratorServiceSkeleton().returnmentReminder(response);			
-//		} catch (InterruptedException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		try {
+			RentalTrackingCallBackServiceStub stub = new RentalTrackingCallBackServiceStub();
+			RentalTrackingCallBackServiceStub.ReturnmentReminder response = new RentalTrackingCallBackServiceStub.ReturnmentReminder();
+			
+			
+			response.setIceSkateID(rentalTracking0.getIceSkatesID());
+			response.setDeliveryID(rentalTracking0.getDeliveryID());
+			response.setExpectedReturnDate(calendar);
+			
+			stub.returnmentReminder(response);
+			System.out.println("sended");
+		} catch (RemoteException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 
 }

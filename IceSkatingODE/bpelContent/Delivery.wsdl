@@ -21,14 +21,12 @@
 		<wsdl:part name="weight" type="xsd:string"/>
 		<wsdl:part name="iceSkatesID" type="xsd:int"/>
 		<wsdl:part name="customer" type="customer:Customer"/>
-		<wsdl:part name="callbackURL" type="xsd:string"/>
 		<wsdl:part name="deliveryID" type="xsd:int"/>
 	</wsdl:message>
 	
 	<wsdl:message name="DeliveryResponse">
 		<wsdl:part name="deliveryID" type="xsd:int"/> 
 		<wsdl:part name="approved" type="xsd:boolean"/>
-		<wsdl:part name="orderID" type="xsd:int"/>
 		<wsdl:part name="price" type="xsd:double"/>
 		<wsdl:part name="expectedDeliveryDate" type="xsd:dateTime"/>
 		<wsdl:part name="carrier" type="xsd:string"/>

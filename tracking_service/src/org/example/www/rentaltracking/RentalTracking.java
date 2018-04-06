@@ -56,30 +56,30 @@
                             
 
                         /**
-                        * field for CallbackURL
+                        * field for DeliveryID
                         */
 
                         
-                                    protected java.lang.String localCallbackURL ;
+                                    protected int localDeliveryID ;
                                 
 
                            /**
                            * Auto generated getter method
-                           * @return java.lang.String
+                           * @return int
                            */
-                           public  java.lang.String getCallbackURL(){
-                               return localCallbackURL;
+                           public  int getDeliveryID(){
+                               return localDeliveryID;
                            }
 
                            
                         
                             /**
                                * Auto generated setter method
-                               * @param param CallbackURL
+                               * @param param DeliveryID
                                */
-                               public void setCallbackURL(java.lang.String param){
+                               public void setDeliveryID(int param){
                             
-                                            this.localCallbackURL=param;
+                                            this.localDeliveryID=param;
                                        
 
                                }
@@ -158,20 +158,15 @@
                                    xmlWriter.writeEndElement();
                              
                                     namespace = "";
-                                    writeStartElement(null, namespace, "callbackURL", xmlWriter);
+                                    writeStartElement(null, namespace, "deliveryID", xmlWriter);
                              
-
-                                          if (localCallbackURL==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localCallbackURL);
-                                            
-                                          }
+                                               if (localDeliveryID==java.lang.Integer.MIN_VALUE) {
+                                           
+                                                         writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
+                                                      
+                                               } else {
+                                                    xmlWriter.writeCharacters(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDeliveryID));
+                                               }
                                     
                                    xmlWriter.writeEndElement();
                              
@@ -367,11 +362,11 @@
                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localIceSkatesID));
                             
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "callbackURL"));
+                                                                      "deliveryID"));
                                  
-                                         elementList.add(localCallbackURL==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCallbackURL));
-                                    
+                                elementList.add(
+                                   org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localDeliveryID));
+                            
 
                 return new org.apache.axis2.databinding.utils.reader.ADBXMLStreamReaderImpl(qName, elementList.toArray(), attribList.toArray());
             
@@ -481,7 +476,7 @@
                                     
                                     while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
                                 
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","callbackURL").equals(reader.getName())){
+                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","deliveryID").equals(reader.getName())){
                                 
                                        nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
                                        if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
@@ -489,12 +484,14 @@
 
                                     java.lang.String content = reader.getElementText();
                                     
-                                              object.setCallbackURL(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
+                                              object.setDeliveryID(
+                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
                                             
                                        } else {
                                            
                                            
+                                                   object.setDeliveryID(java.lang.Integer.MIN_VALUE);
+                                               
                                            reader.getElementText(); // throw away text nodes if any.
                                        }
                                       

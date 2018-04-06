@@ -116,36 +116,6 @@
                             
 
                         /**
-                        * field for CallbackURL
-                        */
-
-                        
-                                    protected java.lang.String localCallbackURL ;
-                                
-
-                           /**
-                           * Auto generated getter method
-                           * @return java.lang.String
-                           */
-                           public  java.lang.String getCallbackURL(){
-                               return localCallbackURL;
-                           }
-
-                           
-                        
-                            /**
-                               * Auto generated setter method
-                               * @param param CallbackURL
-                               */
-                               public void setCallbackURL(java.lang.String param){
-                            
-                                            this.localCallbackURL=param;
-                                       
-
-                               }
-                            
-
-                        /**
                         * field for DeliveryID
                         */
 
@@ -277,24 +247,6 @@
                                         xmlWriter);
                                     }
                                 
-                                    namespace = "";
-                                    writeStartElement(null, namespace, "callbackURL", xmlWriter);
-                             
-
-                                          if (localCallbackURL==null){
-                                              // write the nil attribute
-                                              
-                                                     writeAttribute("xsi","http://www.w3.org/2001/XMLSchema-instance","nil","1",xmlWriter);
-                                                  
-                                          }else{
-
-                                        
-                                                   xmlWriter.writeCharacters(localCallbackURL);
-                                            
-                                          }
-                                    
-                                   xmlWriter.writeEndElement();
-                             
                                     namespace = "";
                                     writeStartElement(null, namespace, "deliveryID", xmlWriter);
                              
@@ -513,12 +465,6 @@
                                     localCustomer);
                                 
                                       elementList.add(new javax.xml.namespace.QName("",
-                                                                      "callbackURL"));
-                                 
-                                         elementList.add(localCallbackURL==null?null:
-                                         org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localCallbackURL));
-                                    
-                                      elementList.add(new javax.xml.namespace.QName("",
                                                                       "deliveryID"));
                                  
                                 elementList.add(
@@ -677,35 +623,6 @@
                                               
                                         reader.next();
                                     }
-                              }  // End of if for expected property start element
-                                
-                                else{
-                                    // A start element we are not expecting indicates an invalid parameter was passed
-                                    throw new org.apache.axis2.databinding.ADBException("Unexpected subelement " + reader.getName());
-                                }
-                            
-                                    
-                                    while (!reader.isStartElement() && !reader.isEndElement()) reader.next();
-                                
-                                    if (reader.isStartElement() && new javax.xml.namespace.QName("","callbackURL").equals(reader.getName())){
-                                
-                                       nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance","nil");
-                                       if (!"true".equals(nillableValue) && !"1".equals(nillableValue)){
-                                    
-
-                                    java.lang.String content = reader.getElementText();
-                                    
-                                              object.setCallbackURL(
-                                                    org.apache.axis2.databinding.utils.ConverterUtil.convertToString(content));
-                                            
-                                       } else {
-                                           
-                                           
-                                           reader.getElementText(); // throw away text nodes if any.
-                                       }
-                                      
-                                        reader.next();
-                                    
                               }  // End of if for expected property start element
                                 
                                 else{

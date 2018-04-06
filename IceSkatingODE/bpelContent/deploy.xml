@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:billing="http://www.example.org/billing" xmlns:delivery="http://www.example.org/delivery" xmlns:inventory="http://www.example.org/inventory" xmlns:orchestrator="http://www.example.org/orchestrator">
+<deploy xmlns="http://www.apache.org/ode/schemas/dd/2007/03" xmlns:billing="http://www.example.org/billing" xmlns:delivery="http://www.example.org/delivery" xmlns:inventory="http://www.example.org/inventory" xmlns:orchestrator="http://www.example.org/orchestrator" xmlns:rentalTracking="http://www.example.org/rentalTracking">
   <process name="orchestrator:orchestrator.bpel">
     <active>true</active>
     <retired>false</retired>
@@ -10,6 +10,9 @@
     <provide partnerLink="delivery">
       <service name="delivery:deliveryCallBackService" port="deliveryCallBackPort"/>
     </provide>
+    <provide partnerLink="tracking">
+      <service name="rentalTracking:rentalTrackingCallBackService" port="rentalTrackingCallBackPort"/>
+    </provide>
     <invoke partnerLink="inventory">
       <service name="inventory:inventoryService" port="inventoryPort"/>
     </invoke>
@@ -18,6 +21,9 @@
     </invoke>
     <invoke partnerLink="billing">
       <service name="billing:billingService" port="paymentPort"/>
+    </invoke>
+    <invoke partnerLink="tracking">
+      <service name="rentalTracking:rentalTrackingService" port="rentalTrackingPort"/>
     </invoke>
   </process>
 </deploy>

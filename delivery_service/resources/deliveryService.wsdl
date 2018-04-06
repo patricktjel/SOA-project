@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="delivery" targetNamespace="http://www.example.org/delivery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/delivery" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:customer="http://www.example.org/customer">
+<wsdl:definitions name="delivery" targetNamespace="http://www.example.org/delivery" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/delivery" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:customer="http://www.example.org/customer">
   <wsdl:types>
     <xsd:schema>
 	      <xsd:import id="customer.xsd" namespace="http://www.example.org/customer" schemaLocation="customer.xsd"/>
@@ -9,8 +9,6 @@
     <wsdl:part name="deliveryID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="approved" type="xsd:boolean">
-    </wsdl:part>
-    <wsdl:part name="orderID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="price" type="xsd:double">
     </wsdl:part>
@@ -25,8 +23,6 @@
     <wsdl:part name="iceSkatesID" type="xsd:int">
     </wsdl:part>
     <wsdl:part name="customer" type="customer:Customer">
-    </wsdl:part>
-    <wsdl:part name="callbackURL" type="xsd:string">
     </wsdl:part>
     <wsdl:part name="deliveryID" type="xsd:int">
     </wsdl:part>
@@ -65,10 +61,10 @@
     <wsdl:port name="deliveryPort" binding="tns:deliveryBinding">
       <soap:address location="http://localhost:9080/delivery_service/services/deliveryService"/>
     </wsdl:port>
-    <wsdl:port name="deliveryCallBackPort" binding="tns:deliveryCallBackBinding">
-      <soap:address location="http://localhost:8080/ode/processes/deliveryService"/>
-    </wsdl:port>
   </wsdl:service>
+    <vprop:property name="deliveryprop" type="xsd:int"/>
+    <vprop:propertyAlias messageType="tns:requestDelivery" part="deliveryID" propertyName="tns:deliveryprop"/>
+    <vprop:propertyAlias messageType="tns:DeliveryResponse" part="deliveryID" propertyName="tns:deliveryprop"/>
     <plnk:partnerLinkType name="DeliveryPLT">
 		<plnk:role name="DeliveryService" portType="tns:deliveryPortType"/>
 		<plnk:role name="DeliveryServiceCallBack" portType="tns:deliveryCallBackPortType"/>

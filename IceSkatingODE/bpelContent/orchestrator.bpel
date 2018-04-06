@@ -6,6 +6,7 @@
 	xmlns:orc="http://www.example.org/orchestrator" 
 	xmlns:inv="http://www.example.org/inventory"
 	xmlns:del="http://www.example.org/delivery"
+	xmlns:tra="http://www.example.org/rentalTracking"
 	xmlns:bil="http://www.example.org/billing">
 	
 	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
@@ -16,15 +17,15 @@
 		location="Delivery.wsdl" namespace="http://www.example.org/delivery" />
 	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
 		location="Billing.wsdl" namespace="http://www.example.org/billing" />
-<!-- <bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
-		location="RentalTracking.wsdl" namespace="http://www.example.org/rentalTracking" /> -->
+	<bpel:import importType="http://schemas.xmlsoap.org/wsdl/"
+		location="RentalTracking.wsdl" namespace="http://www.example.org/rentalTracking" />
 
 	<bpel:partnerLinks>
 		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService"/>
         <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"/>
         <bpel:partnerLink name="delivery" partnerLinkType="del:DeliveryPLT" myRole="DeliveryServiceCallBack" partnerRole="DeliveryService"/>
         <bpel:partnerLink name="billing" partnerLinkType="bil:BillingPLT" partnerRole="BillingService"/>
-<!-- 	<bpel:partnerLink name="tracking" partnerLinkType="tra:TrackingPLT" myRole="TrackingServiceCallBack" partnerRole="TrackingService"/>        -->
+	 	<bpel:partnerLink name="tracking" partnerLinkType="tra:TrackingPLT" myRole="TrackingServiceCallBack" partnerRole="TrackingService"/>
     </bpel:partnerLinks>
 
 	<bpel:variables>
@@ -34,6 +35,7 @@
 		<bpel:variable name="getPairOfSkatesRequest" messageType="inv:getPairOfSkatesRequest" />
 		<bpel:variable name="getPairOfSkatesResponse" messageType="inv:getPairOfSkatesResponse" />
 		<bpel:variable name="returnPairOfSkates" messageType="inv:returnPairOfSkates" />
+		<bpel:variable name="returnPairOfSkatesResponse" messageType="inv:returnPairOfSkatesResponse" />
 		
 		<bpel:variable name="requestDelivery" messageType="del:requestDelivery" />
 		<bpel:variable name="DeliveryResponse" messageType="del:DeliveryResponse" />
@@ -41,26 +43,30 @@
 		<bpel:variable name="paymentRequest" messageType="bil:paymentRequest" />
 		<bpel:variable name="paymentResponse" messageType="bil:paymentResponse" />
 		
-<!-- 	<bpel:variable name="trackIceSkatesRequest" messageType="tra:trackIceSkatesRequest" />
-		<bpel:variable name="returnmentReminder" messageType="tra:returnmentReminder" /> -->
+	 	<bpel:variable name="trackIceSkatesRequest" messageType="tra:trackIceSkatesRequest" />
+		<bpel:variable name="returnmentReminder" messageType="tra:returnmentReminder" />
 	</bpel:variables>
 
 	<bpel:correlationSets>
 		<bpel:correlationSet name="correlationSet" properties="del:deliveryprop" />
+		<bpel:correlationSet name="trackingSet" properties="tra:trackingprop"/>
 	</bpel:correlationSets>
     
-    <bpel:flow name="main"><bpel:links>
-        	<bpel:link name="link1"></bpel:link>
+    <bpel:flow name="main">
+        <bpel:links><bpel:link name="link1"></bpel:link>
             <bpel:link name="link2"></bpel:link>
             <bpel:link name="link3"></bpel:link>
             <bpel:link name="link5"></bpel:link>
             
-            <bpel:link name="link7"></bpel:link>
+            
             <bpel:link name="link4"></bpel:link>
             <bpel:link name="link6"></bpel:link>
-        </bpel:links>
+            <bpel:link name="link8"></bpel:link>
+            <bpel:link name="link7"></bpel:link>
+            <bpel:link name="link9"></bpel:link>
+            <bpel:link name="link10"></bpel:link>
         
-        <bpel:receive name="Receive" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" createInstance="yes" variable="rentIceSkatesRequest">
+        </bpel:links><bpel:receive name="Receive" partnerLink="customer" operation="rentIceSkates" portType="orc:OrchestratorPortType" createInstance="yes" variable="rentIceSkatesRequest">
             <bpel:sources>
                 <bpel:source linkName="link1"></bpel:source>
             </bpel:sources>
@@ -128,9 +134,10 @@
                 <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
                     <![CDATA[$rentIceSkatesResponse.succeeded]]>
                 </bpel:to>
-            </bpel:copy>
+            </bpel:copy>
             <bpel:targets>
                 <bpel:target linkName="link7"></bpel:target>
+                <bpel:target linkName="link10"></bpel:target>
             </bpel:targets>
         </bpel:assign>
     <bpel:sequence name="DeliverySequence">
@@ -159,10 +166,7 @@
                         <![CDATA[$requestDelivery.deliveryID]]>
                     </bpel:to>
                 </bpel:copy>
-                <bpel:copy>
-                    <bpel:from part="size" variable="getPairOfSkatesRequest"></bpel:from>
-                    <bpel:to part="callbackURL" variable="requestDelivery"></bpel:to>
-                </bpel:copy>
+                
                 <bpel:copy>
                     <bpel:from part="size" variable="getPairOfSkatesRequest"></bpel:from>
                     <bpel:to part="weight" variable="requestDelivery"></bpel:to>
@@ -211,10 +215,80 @@
             </bpel:assign>
             <bpel:invoke name="Invoke2" partnerLink="billing" operation="payment" portType="bil:paymentPortType" inputVariable="paymentRequest" outputVariable="paymentResponse"></bpel:invoke>
             <bpel:sources>
-                <bpel:source linkName="link7"></bpel:source>
+                
+                <bpel:source linkName="link8">
+                    <bpel:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$paymentResponse.succeeded = "true"]]></bpel:transitionCondition>
+                </bpel:source>
+                <bpel:source linkName="link9">
+                    <bpel:transitionCondition expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0"><![CDATA[$paymentResponse.succeeded != "true"]]></bpel:transitionCondition>
+                </bpel:source>
             </bpel:sources>
             <bpel:targets>
                 <bpel:target linkName="link6"></bpel:target>
             </bpel:targets>
-        </bpel:sequence></bpel:flow>
+        </bpel:sequence><bpel:sequence name="Sequence">
+            <bpel:assign validate="no" name="Assign5">
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$requestDelivery.deliveryID]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$trackIceSkatesRequest.deliveryID]]>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$requestDelivery.iceSkatesID]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$trackIceSkatesRequest.iceSkatesID]]>
+                    </bpel:to>
+                </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke name="Invoke3" partnerLink="tracking" operation="rentalTracking" portType="tra:rentalTrackingPortType" inputVariable="trackIceSkatesRequest">
+                <bpel:correlations>
+                    <bpel:correlation set="trackingSet" initiate="yes"></bpel:correlation>
+                </bpel:correlations>
+            </bpel:invoke>
+            <bpel:targets>
+                <bpel:target linkName="link8"></bpel:target>
+            </bpel:targets>
+            <bpel:sources>
+                <bpel:source linkName="link7"></bpel:source>
+            </bpel:sources>
+            <bpel:receive name="Receive1" partnerLink="tracking" operation="ReturnmentReminder" portType="tra:rentalTrackingCallBackPortType" variable="returnmentReminder">
+                <bpel:correlations>
+                    <bpel:correlation set="trackingSet" initiate="no"></bpel:correlation>
+                </bpel:correlations>
+            </bpel:receive>
+        </bpel:sequence><bpel:sequence name="Sequence1">
+            <bpel:targets>
+                <bpel:target linkName="link9"></bpel:target>
+            </bpel:targets>
+            <bpel:sources>
+                <bpel:source linkName="link10"></bpel:source>
+            </bpel:sources>
+            <bpel:assign validate="yes" name="Assign6">
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$getPairOfSkatesRequest.size]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        
+                        
+                        <![CDATA[$returnPairOfSkates.size]]>
+                    </bpel:to>
+                </bpel:copy>
+                <bpel:copy>
+                    <bpel:from expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$getPairOfSkatesResponse.iceSkatesID]]>
+                    </bpel:from>
+                    <bpel:to expressionLanguage="urn:oasis:names:tc:wsbpel:2.0:sublang:xpath1.0">
+                        <![CDATA[$returnPairOfSkates.iceSkatesID]]>
+                    </bpel:to>
+                </bpel:copy>
+            </bpel:assign>
+            <bpel:invoke name="Invoke4" partnerLink="inventory" operation="returnSkates" portType="inv:inventoryPortType" inputVariable="returnPairOfSkates" outputVariable="returnPairOfSkatesResponse"></bpel:invoke>
+        </bpel:sequence>
+    </bpel:flow>
 </bpel:process>

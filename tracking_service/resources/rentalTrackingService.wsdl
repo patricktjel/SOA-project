@@ -1,14 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<wsdl:definitions name="rentalTracking" targetNamespace="http://www.example.org/rentalTracking" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/rentalTracking" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
+<wsdl:definitions name="rentalTracking" targetNamespace="http://www.example.org/rentalTracking" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:tns="http://www.example.org/rentalTracking" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:vprop="http://docs.oasis-open.org/wsbpel/2.0/varprop" xmlns:plnk="http://docs.oasis-open.org/wsbpel/2.0/plnktype" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/">
   <wsdl:message name="trackIceSkatesRequest">
     <wsdl:part name="iceSkatesID" type="xsd:int">
     </wsdl:part>
-    <wsdl:part name="callbackURL" type="xsd:string">
+    <wsdl:part name="deliveryID" type="xsd:int">
+    </wsdl:part>
+  </wsdl:message>
+  <wsdl:message name="returnmentReminder">
+    <wsdl:part name="iceSkateID" type="xsd:int">
+    </wsdl:part>
+    <wsdl:part name="expectedReturnDate" type="xsd:dateTime">
+    </wsdl:part>
+    <wsdl:part name="deliveryID" type="xsd:int">
     </wsdl:part>
   </wsdl:message>
   <wsdl:portType name="rentalTrackingPortType">
     <wsdl:operation name="rentalTracking">
       <wsdl:input message="tns:trackIceSkatesRequest">
+    </wsdl:input>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:portType name="rentalTrackingCallBackPortType">
+    <wsdl:operation name="ReturnmentReminder">
+      <wsdl:input message="tns:returnmentReminder">
     </wsdl:input>
     </wsdl:operation>
   </wsdl:portType>
@@ -21,9 +35,25 @@
       </wsdl:input>
     </wsdl:operation>
   </wsdl:binding>
+  <wsdl:binding name="rentalTrackingCallBackBinding" type="tns:rentalTrackingCallBackPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="ReturnmentReminder">
+      <soap:operation style="rpc"/>
+      <wsdl:input>
+        <soap:body use="literal" namespace="http://www.example.org/rentalTrackingReminder"/>
+      </wsdl:input>
+    </wsdl:operation>
+  </wsdl:binding>
   <wsdl:service name="rentalTrackingService">
     <wsdl:port name="rentalTrackingPort" binding="tns:rentalTrackingBinding">
-      <soap:address location="http://localhost:8080/SOA-project/services/rentalTrackingService"/>
+      <soap:address location="http://localhost:9080/tracking_service/services/rentalTrackingService"/>
     </wsdl:port>
   </wsdl:service>
+    <vprop:property name="trackingprop" type="xsd:int"/>
+    <vprop:propertyAlias messageType="tns:trackIceSkatesRequest" part="deliveryID" propertyName="tns:trackingprop"/>
+    <vprop:propertyAlias messageType="tns:returnmentReminder" part="deliveryID" propertyName="tns:trackingprop"/>
+    <plnk:partnerLinkType name="TrackingPLT">
+		<plnk:role name="TrackingService" portType="tns:rentalTrackingPortType"/>
+		<plnk:role name="TrackingServiceCallBack" portType="tns:rentalTrackingPortType"/>
+	</plnk:partnerLinkType>
 </wsdl:definitions>

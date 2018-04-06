@@ -10,8 +10,7 @@ package org.example.www.delivery;
 import java.rmi.RemoteException;
 import java.util.Calendar;
 
-import org.apache.axis2.AxisFault;
-import org.example.www.delivery.client.DeliveryServiceStub;
+import org.example.www.delivery.client.DeliveryCallBackServiceStub;
 
 /**
  * DeliveryServiceSkeleton java skeleton for the axisService
@@ -36,20 +35,16 @@ public class DeliveryServiceSkeleton implements DeliveryServiceSkeletonInterface
 		System.out.println(carrier);
 
 		try {
-			DeliveryServiceStub stub = new DeliveryServiceStub();
-			DeliveryServiceStub.DeliveryCallBack response = new DeliveryServiceStub.DeliveryCallBack();
+			DeliveryCallBackServiceStub stub = new DeliveryCallBackServiceStub();
+			DeliveryCallBackServiceStub.DeliveryCallBack response = new DeliveryCallBackServiceStub.DeliveryCallBack();
 			response.setCarrier(carrier.getCarrierName());
 			response.setApproved(true);
 			response.setDeliveryID(delivery0.getDeliveryID());
 			response.setExpectedDeliveryDate(Calendar.getInstance());
-			response.setOrderID(delivery0.getDeliveryID());
 			response.setPrice(carrier.getPrice());
 			
 			stub.deliveryCallBack(response);
 			System.out.println("sended");
-		} catch (AxisFault e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
 		} catch (RemoteException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

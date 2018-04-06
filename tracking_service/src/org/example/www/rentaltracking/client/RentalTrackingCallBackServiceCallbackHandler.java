@@ -1,18 +1,18 @@
 
 /**
- * DeliveryServiceCallbackHandler.java
+ * RentalTrackingCallBackServiceCallbackHandler.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:03:39 GMT)
  */
 
-    package org.example.www.delivery.client;
+    package org.example.www.rentaltracking.client;
 
     /**
-     *  DeliveryServiceCallbackHandler Callback class, Users can extend this class and implement
+     *  RentalTrackingCallBackServiceCallbackHandler Callback class, Users can extend this class and implement
      *  their own receiveResult and receiveError methods.
      */
-    public abstract class DeliveryServiceCallbackHandler{
+    public abstract class RentalTrackingCallBackServiceCallbackHandler{
 
 
 
@@ -24,14 +24,14 @@
     * @param clientData Object mechanism by which the user can pass in user data
     * that will be avilable at the time this callback is called.
     */
-    public DeliveryServiceCallbackHandler(Object clientData){
+    public RentalTrackingCallBackServiceCallbackHandler(Object clientData){
         this.clientData = clientData;
     }
 
     /**
     * Please use this constructor if you don't want to set any clientData
     */
-    public DeliveryServiceCallbackHandler(){
+    public RentalTrackingCallBackServiceCallbackHandler(){
         this.clientData = null;
     }
 

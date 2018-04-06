@@ -1,19 +1,17 @@
 
 /**
- * DeliveryServiceStub.java
+ * DeliveryCallBackServiceStub.java
  *
  * This file was auto-generated from WSDL
  * by the Apache Axis2 version: 1.6.4  Built on : Dec 28, 2015 (10:03:39 GMT)
  */
 package org.example.www.delivery.client;
 
-import org.apache.axis2.addressing.EndpointReference;
-
 /*
-*  DeliveryServiceStub java implementation
+*  DeliveryCallBackServiceStub java implementation
 */
 
-public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
+public class DeliveryCallBackServiceStub extends org.apache.axis2.client.Stub {
 	protected org.apache.axis2.description.AxisOperation[] _operations;
 
 	// hashmaps to keep the fault mapping
@@ -35,7 +33,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	private void populateAxisService() throws org.apache.axis2.AxisFault {
 
 		// creating the Service with a unique name
-		_service = new org.apache.axis2.description.AxisService("DeliveryService" + getUniqueSuffix());
+		_service = new org.apache.axis2.description.AxisService("DeliveryCallBackService" + getUniqueSuffix());
 		addAnonymousOperations();
 
 		// creating the operations
@@ -61,7 +59,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	 * Constructor that takes in a configContext
 	 */
 
-	public DeliveryServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext,
+	public DeliveryCallBackServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext,
 			java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
 		this(configurationContext, targetEndpoint, false);
 	}
@@ -69,7 +67,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	/**
 	 * Constructor that takes in a configContext and useseperate listner
 	 */
-	public DeliveryServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext,
+	public DeliveryCallBackServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext,
 			java.lang.String targetEndpoint, boolean useSeparateListener) throws org.apache.axis2.AxisFault {
 		// To populate AxisService
 		populateAxisService();
@@ -85,7 +83,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	/**
 	 * Default Constructor
 	 */
-	public DeliveryServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext)
+	public DeliveryCallBackServiceStub(org.apache.axis2.context.ConfigurationContext configurationContext)
 			throws org.apache.axis2.AxisFault {
 
 		this(configurationContext, "http://localhost:8080/ode/processes/deliveryCallBack");
@@ -95,7 +93,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	/**
 	 * Default Constructor
 	 */
-	public DeliveryServiceStub() throws org.apache.axis2.AxisFault {
+	public DeliveryCallBackServiceStub() throws org.apache.axis2.AxisFault {
 
 		this("http://localhost:8080/ode/processes/deliveryCallBack");
 
@@ -104,7 +102,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	/**
 	 * Constructor taking the target endpoint
 	 */
-	public DeliveryServiceStub(java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
+	public DeliveryCallBackServiceStub(java.lang.String targetEndpoint) throws org.apache.axis2.AxisFault {
 		this(null, targetEndpoint);
 	}
 
@@ -112,7 +110,8 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	 * Auto generated method signature
 	 * 
 	 */
-	public void deliveryCallBack(org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack deliveryCallBack0
+	public void deliveryCallBack(
+			org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack deliveryCallBack0
 
 	) throws java.rmi.RemoteException
 
@@ -122,8 +121,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 		org.apache.axis2.client.OperationClient _operationClient = _serviceClient
 				.createClient(_operations[0].getName());
 		_operationClient.getOptions()
-				.setAction("http://localhost:9000/delivery/deliveryCallBackPortType/DeliveryCallBack");
-
+				.setAction("http://www.example.org/delivery/deliveryCallBackPortType/DeliveryCallBack");
 		_operationClient.getOptions().setExceptionToBeThrownOnSOAPFault(true);
 
 		addPropertyToOperationClient(_operationClient,
@@ -146,6 +144,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 
 		// add the message contxt to the operation client
 		_operationClient.addMessageContext(_messageContext);
+
 		_operationClient.execute(true);
 
 		if (_messageContext.getTransportOut() != null) {
@@ -183,7 +182,7 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 		return false;
 	}
 
-	// http://localhost:8080/ode/processes/orchestratorService
+	// http://localhost:8080/ode/processes/deliveryCallBack
 	public static class DeliveryCallBack implements org.apache.axis2.databinding.ADBBean {
 
 		public static final javax.xml.namespace.QName MY_QNAME = new javax.xml.namespace.QName(
@@ -240,33 +239,6 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 		public void setApproved(boolean param) {
 
 			this.localApproved = param;
-
-		}
-
-		/**
-		 * field for OrderID
-		 */
-
-		protected int localOrderID;
-
-		/**
-		 * Auto generated getter method
-		 * 
-		 * @return int
-		 */
-		public int getOrderID() {
-			return localOrderID;
-		}
-
-		/**
-		 * Auto generated setter method
-		 * 
-		 * @param param
-		 *            OrderID
-		 */
-		public void setOrderID(int param) {
-
-			this.localOrderID = param;
 
 		}
 
@@ -420,20 +392,6 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 			} else {
 				xmlWriter.writeCharacters(
 						org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localApproved));
-			}
-
-			xmlWriter.writeEndElement();
-
-			namespace = "";
-			writeStartElement(null, namespace, "orderID", xmlWriter);
-
-			if (localOrderID == java.lang.Integer.MIN_VALUE) {
-
-				writeAttribute("xsi", "http://www.w3.org/2001/XMLSchema-instance", "nil", "1", xmlWriter);
-
-			} else {
-				xmlWriter.writeCharacters(
-						org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrderID));
 			}
 
 			xmlWriter.writeEndElement();
@@ -678,10 +636,6 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 
 			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localApproved));
 
-			elementList.add(new javax.xml.namespace.QName("", "orderID"));
-
-			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localOrderID));
-
 			elementList.add(new javax.xml.namespace.QName("", "price"));
 
 			elementList.add(org.apache.axis2.databinding.utils.ConverterUtil.convertToString(localPrice));
@@ -821,37 +775,6 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 						reader.next();
 
 					if (reader.isStartElement()
-							&& new javax.xml.namespace.QName("", "orderID").equals(reader.getName())) {
-
-						nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
-						if (!"true".equals(nillableValue) && !"1".equals(nillableValue)) {
-
-							java.lang.String content = reader.getElementText();
-
-							object.setOrderID(org.apache.axis2.databinding.utils.ConverterUtil.convertToInt(content));
-
-						} else {
-
-							object.setOrderID(java.lang.Integer.MIN_VALUE);
-
-							reader.getElementText(); // throw away text nodes if any.
-						}
-
-						reader.next();
-
-					} // End of if for expected property start element
-
-					else {
-						// A start element we are not expecting indicates an invalid parameter was
-						// passed
-						throw new org.apache.axis2.databinding.ADBException(
-								"Unexpected subelement " + reader.getName());
-					}
-
-					while (!reader.isStartElement() && !reader.isEndElement())
-						reader.next();
-
-					if (reader.isStartElement()
 							&& new javax.xml.namespace.QName("", "price").equals(reader.getName())) {
 
 						nillableValue = reader.getAttributeValue("http://www.w3.org/2001/XMLSchema-instance", "nil");
@@ -969,11 +892,12 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	}
 
 	private org.apache.axiom.om.OMElement toOM(
-			org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack param, boolean optimizeContent)
+			org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack param, boolean optimizeContent)
 			throws org.apache.axis2.AxisFault {
 
 		try {
-			return param.getOMElement(org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack.MY_QNAME,
+			return param.getOMElement(
+					org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack.MY_QNAME,
 					org.apache.axiom.om.OMAbstractFactory.getOMFactory());
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -982,14 +906,14 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 	}
 
 	private org.apache.axiom.soap.SOAPEnvelope toEnvelope(org.apache.axiom.soap.SOAPFactory factory,
-			org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack param, boolean optimizeContent,
+			org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack param, boolean optimizeContent,
 			javax.xml.namespace.QName methodQName) throws org.apache.axis2.AxisFault {
 
 		try {
 
 			org.apache.axiom.soap.SOAPEnvelope emptyEnvelope = factory.getDefaultEnvelope();
 			emptyEnvelope.getBody().addChild(param.getOMElement(
-					org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack.MY_QNAME, factory));
+					org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack.MY_QNAME, factory));
 			return emptyEnvelope;
 		} catch (org.apache.axis2.databinding.ADBException e) {
 			throw org.apache.axis2.AxisFault.makeFault(e);
@@ -1011,9 +935,9 @@ public class DeliveryServiceStub extends org.apache.axis2.client.Stub {
 
 		try {
 
-			if (org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack.class.equals(type)) {
+			if (org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack.class.equals(type)) {
 
-				return org.example.www.delivery.client.DeliveryServiceStub.DeliveryCallBack.Factory
+				return org.example.www.delivery.client.DeliveryCallBackServiceStub.DeliveryCallBack.Factory
 						.parse(param.getXMLStreamReaderWithoutCaching());
 
 			}
