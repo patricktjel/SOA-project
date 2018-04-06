@@ -37,13 +37,14 @@
 		<wsdl:operation name="delivery">
 			<wsdl:input message="tns:requestDelivery"/>
 		</wsdl:operation>
-		<wsdl:operation name="DeliveryResponse">
+		<wsdl:operation name="DeliveryCallBack">
 			<wsdl:input message="tns:DeliveryResponse"/>
 		</wsdl:operation>
 	</wsdl:portType>
 	
 	<plnk:partnerLinkType name="DeliveryPLT">
 		<plnk:role name="DeliveryService" portType="tns:deliveryPortType" />
+		<plnk:role name="DeliveryServiceCallBack" portType="tns:deliveryPortType" />
 	</plnk:partnerLinkType>
 	
 	<wsdl:binding name="deliveryBinding" type="tns:deliveryPortType">
@@ -54,10 +55,10 @@
 				<soap:body use="literal" namespace="http://www.example.org/delivery"/>
 			</wsdl:input>
 		</wsdl:operation>
-		<wsdl:operation name="DeliveryResponse">
+		<wsdl:operation name="DeliveryCallBack">
 			<soap:operation style="rpc"/>
 			<wsdl:input>
-				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
+				<soap:body use="literal" namespace="http://www.example.org/delivery_callbackservice"/>
 			</wsdl:input>
 		</wsdl:operation>
 	</wsdl:binding>

@@ -22,9 +22,9 @@
 	<bpel:partnerLinks>
 		<bpel:partnerLink name="customer" partnerLinkType="orc:OrchestratorPLT" myRole="orchestratorService"/>
         <bpel:partnerLink name="inventory" partnerLinkType="inv:InventoryPLT" partnerRole="InventoryService"/>
-        <bpel:partnerLink name="delivery" partnerLinkType="del:DeliveryPLT" partnerRole="DeliveryService"/>
+        <bpel:partnerLink name="delivery" partnerLinkType="del:DeliveryPLT" myRole="DeliveryServiceCallBack" partnerRole="DeliveryService"/>
         <bpel:partnerLink name="billing" partnerLinkType="bil:BillingPLT" partnerRole="BillingService"/>
-<!-- 	<bpel:partnerLink name="tracking" partnerLinkType="tra:TrackingPLT" partnerRole="TrackingService"/> -->        
+        <bpel:partnerLink name="tracking" partnerLinkType="tra:TrackingPLT" myRole="TrackingServiceCallBack" partnerRole="TrackingService"/>       
     </bpel:partnerLinks>
 
 	<bpel:variables>
@@ -36,11 +36,13 @@
 		<bpel:variable name="returnPairOfSkates" messageType="inv:returnPairOfSkates" />
 		
 		<bpel:variable name="requestDelivery" messageType="del:requestDelivery" />
+		<bpel:variable name="DeliveryResponse" messageType="del:DeliveryResponse" />
 		
 		<bpel:variable name="paymentRequest" messageType="bil:paymentRequest" />
 		<bpel:variable name="paymentResponse" messageType="bil:paymentResponse" />
 		
 		<bpel:variable name="trackIceSkatesRequest" messageType="tra:trackIceSkatesRequest" />
+		<bpel:variable name="returnmentReminder" messageType="tra:returnmentReminder" />
 	</bpel:variables>
     
     <bpel:flow name="main"><bpel:links>
@@ -171,6 +173,8 @@
             </bpel:assign>
             
             <bpel:invoke name="Invoke1" partnerLink="delivery" operation="delivery" portType="del:deliveryPortType" inputVariable="requestDelivery"></bpel:invoke>
+            <bpel:receive partnerLink="delivery" operation="DeliveryCallBack" portType="del:deliveryPortType" variable="DeliveryResponse"></bpel:receive>
+            
             <bpel:targets>
                 <bpel:target linkName="link4"></bpel:target>
             </bpel:targets>

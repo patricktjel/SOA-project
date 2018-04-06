@@ -12,14 +12,23 @@
 		<wsdl:part name="callbackURL" type="xsd:string"/>
 	</wsdl:message>
 	
+	<wsdl:message name="returnmentReminder">
+		<wsdl:part name="iceSkateID" type="xsd:int"/>
+		<wsdl:part name="expectedReturnDate" type="xsd:dateTime"/>
+	</wsdl:message>
+	
 	<wsdl:portType name="trackingPortType">
 		<wsdl:operation name="rentalTracking">
 			<wsdl:input message="tns:trackIceSkatesRequest"/>
 		</wsdl:operation>
+		<wsdl:operation name="TrackCallBack">
+			<wsdl:input message="tns:returnmentReminder"/>
+		</wsdl:operation>
 	</wsdl:portType>
 	
 	<plnk:partnerLinkType name="TrackingPLT">
-		<plnk:role name="TrackingService" portType="trackingPortType" />
+		<plnk:role name="TrackingService" portType="tns:trackingPortType" />
+		<plnk:role name="TrackingServiceCallBack" portType="tns:trackingPortType" />
 	</plnk:partnerLinkType>
 	
 	<wsdl:binding name="trackingBinding" type="tns:trackingPortType">
@@ -28,6 +37,12 @@
 			<soap:operation style="rpc"/>
 			<wsdl:input>
 				<soap:body use="literal" namespace="http://www.example.org/rentalTracking"/>
+			</wsdl:input>
+		</wsdl:operation>
+		<wsdl:operation name="TrackCallBack">
+			<soap:operation style="rpc"/>
+			<wsdl:input>
+				<soap:body use="literal" namespace="http://www.example.org/orchestrator"/>
 			</wsdl:input>
 		</wsdl:operation>
 	</wsdl:binding>
